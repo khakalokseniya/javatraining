@@ -8,3 +8,8 @@ SE_01/1/.classpath
 SE_01/1/.settings/org.eclipse.jdt.core.prefs
 SE_01/1/.settings/org.eclipse.m2e.core.prefs
 SE_01/1/.gitignore
+SE_01/1/target/classes/META-INF/MANIFEST.MF
+SE_01/1/target/classes/META-INF/maven/training.kk.2015/lab1/pom.properties
+SE_01/1/target/classes/META-INF/maven/training.kk.2015/lab1/pom.xml
+SE_01/1/target/classes/logic/Logic.class
+SE_01/1/target/classes/main/Main.class
