@@ -26,7 +26,7 @@ public class function {
 			list2.add(i);
 		}
 		for (int s = 0; s < list.size(); s++)
-		System.out.println(list2.get(s) + " " + list.get(s));
+		System.out.println(list2.get(s) + "  |  " + list.get(s));
 	}
 
 }
