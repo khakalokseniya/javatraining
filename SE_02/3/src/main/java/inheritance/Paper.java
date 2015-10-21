@@ -1,12 +1,18 @@
 package inheritance;
 
-public class Paper extends Stationery{
-	public Paper(String name, int price){
+public class Paper extends Stationery {
+
+	public Paper(String name, int price) {
 		super(name, price);
 	}
-	
-	public void info(){
-		System.out.print("Paper");
+
+	public void info() {
+		System.out.println("Paper");
+	}
+
+	@Override
+	public String toString() {
+		return "Paper " + getName() + " " + getPrice();
 	}
 
 }
