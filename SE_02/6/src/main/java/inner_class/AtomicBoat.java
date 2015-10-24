@@ -1,13 +1,17 @@
 package inner_class;
 
 public class AtomicBoat {
-	public void getSail() {
-		System.out.println("I'm going to sail!");
+
+	private class EngineForAtomicBoat {
+		public void engineStart() {
+			System.out.println("I'm going to sail!");
+		}
 	}
 
-	private class Engine{
-		AtomicBoat boat = new AtomicBoat();
-		boat.getSail();		
-	};
+	public static void main(String[] args) {
+		AtomicBoat atom = new AtomicBoat();
+		AtomicBoat.EngineForAtomicBoat boat = atom.new EngineForAtomicBoat();
+		boat.engineStart();
+	}
 
 }
