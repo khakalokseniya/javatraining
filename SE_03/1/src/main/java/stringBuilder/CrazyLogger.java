@@ -11,21 +11,71 @@ public class CrazyLogger {
 	StringBuilder log = new StringBuilder();
 
 	public CrazyLogger() {
-
 	}
 
 	public void addLog(String message) {
 		log.append(df.format(today));
-		log.append(message).append('\n');
+		log.append('\t').append(message).append('\n');
 	}
 
 	public StringBuilder getLog() {
 		return log;
 	}
 
-	public String fingLog(int index1, int index2) {
-		return log.substring(index1, index2);
+	public String findLog(String str) {
+		int i = log.indexOf(str);
+		int start;
+		int finish;
+		while (true) {
+			i--;
+			if (log.charAt(i) == '\t') {
+				break;
+			}
+			start = i;
+		}
 
+		while (true) {
+			i++;
+			if (log.charAt(i) == '\n') {
+				finish = i;
+			}
+			break;
+		}
+		
+			return log.substring(start, finish);
+		
+
+	}
+
+	public int index(String str) {
+		return log.indexOf(str);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CrazyLogger other = (CrazyLogger) obj;
+		if (df == null) {
+			if (other.df != null)
+				return false;
+		} else if (!df.equals(other.df))
+			return false;
+		if (log == null) {
+			if (other.log != null)
+				return false;
+		} else if (!log.equals(other.log))
+			return false;
+		if (today == null) {
+			if (other.today != null)
+				return false;
+		} else if (!today.equals(other.today))
+			return false;
+		return true;
 	}
 
 }
