@@ -14,10 +14,10 @@ public class LogIn {
 		login.addLog(reader.readLine());
 		login.addLog(reader.readLine());
 		System.out.println(login.getLog());
+		
 		System.out.println("¬ведите выражение дл€ поиска");
 		String s = reader.readLine();
-			
 
-		System.out.println(login.index(s));
+		System.out.println(login.findLog(s));
 	}
 }
