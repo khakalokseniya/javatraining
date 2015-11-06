@@ -16,11 +16,9 @@ public class Runner {
 		Film glad = null;
 		try {
 			glad = sz.deserialization(file);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (InvalidObjectException e) {
 			e.printStackTrace();
 		}
-		System.out.println(glad);
+		System.out.println(glad.toString());
 	}
 }

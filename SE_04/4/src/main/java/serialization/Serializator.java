@@ -30,8 +30,7 @@ public class Serializator {
 		return flag;
 	}
 
-	public Film deserialization(String fileName) throws InvalidObjectException,
-			ClassNotFoundException {
+	public Film deserialization(String fileName) throws InvalidObjectException {
 		File dfile = new File(fileName);
 		ObjectInputStream instream = null;
 		try {
@@ -39,10 +38,10 @@ public class Serializator {
 			instream = new ObjectInputStream(fis);
 			Film fl = (Film) instream.readObject();
 			return fl;
-		} catch (IOException ce) {
-			System.err.println(ce);
 		} catch (ClassNotFoundException ne) {
 			System.err.println(ne);
+		} catch (IOException ce) {
+			System.err.println(ce);
 		} finally {
 			try {
 				if (instream != null) {
