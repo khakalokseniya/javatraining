@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>java.training.project.kk</groupId>
+	<artifactId>parent-project</artifactId>
+	<version>1.0.0</version>
+
+	<packaging>pom</packaging>
+
+
+	<modules>
+		<module>dataaccess</module>
+		<module>services</module>
+		<module>webapp</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Project modules -->
+			<dependency>
+				<groupId>java.training.project.kk</groupId>
+				<artifactId>dataaccess</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>java.training.project.kk</groupId>
+				<artifactId>services</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>java.training.project.kk</groupId>
+				<artifactId>webapp</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	</project>
