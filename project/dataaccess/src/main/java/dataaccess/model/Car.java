@@ -13,7 +13,6 @@ public class Car {
 	public Car(String brand, String registrationNumber){
 		this.brand = brand;
 		this.registrationNumber = registrationNumber;
-		this.id += 1;
 	}
 
 	/**
