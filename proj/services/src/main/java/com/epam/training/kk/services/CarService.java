@@ -6,10 +6,11 @@ public interface CarService {
 	
 	Car get(Long id);
 	
-	 void location(Car car);
+	Long insert(Car car);
 	 
-	 void insertOrUpdate(Car car);
-	 
-	 void radius(Car car);
+	Long update(String registrationNumber, String brand, String model, String color, int year,
+			String callsign, Long driverId, boolean activity, Long id);
+	
+	void delete(Long id);
 
 }

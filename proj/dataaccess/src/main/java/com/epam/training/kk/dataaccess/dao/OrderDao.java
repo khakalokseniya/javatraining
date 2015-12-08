@@ -1,14 +1,18 @@
 package com.epam.training.kk.dataaccess.dao;
 
+
 import com.epam.training.kk.dataaccess.model.Order;
 
 public interface OrderDao {
 	Order getById(Long id);
 
-	void insert(Order order);
+	Long insert(Order order);
 
-	void update(Order order);
 
 	void delete(Long id);
+
+
+	void update(Long id, int clientId, int carId, String address, String time,
+			float distance, int price, boolean isCompleted);
 
 }

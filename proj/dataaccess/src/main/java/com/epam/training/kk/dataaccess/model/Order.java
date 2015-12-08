@@ -4,18 +4,17 @@ import java.sql.Time;
 
 public class Order {
 	private Long id;
-	private Client client;
-	private Car car;
+	private int clientId;
+	private int carId;
 	private String address;
-	private Time time;
-	private int distance;
+	private String time;
+	private float distance;
 	private int price;
 	boolean isCompleted;
 
-	public Order(Client client, Car car, String address, Time time) {
-		super();
-		this.client = client;
-		this.car = car;
+	public Order(int clientId, int carId, String address, String time) {
+		this.clientId = clientId;
+		this.carId = carId;
 		this.address = address;
 		this.time = time;
 	}
@@ -35,34 +34,34 @@ public class Order {
 		this.id = id;
 	}
 
+	
+
 	/**
-	 * @return the car
+	 * @return the clientId
 	 */
-	public Car getCar() {
-		return car;
+	public int getClientId() {
+		return clientId;
 	}
 
 	/**
-	 * @param car
-	 *            the car to set
+	 * @param clientId the clientId to set
 	 */
-	public void setCar(Car car) {
-		this.car = car;
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
 	}
 
 	/**
-	 * @return the client
+	 * @return the carId
 	 */
-	public Client getClient() {
-		return client;
+	public int getCarId() {
+		return carId;
 	}
 
 	/**
-	 * @param client
-	 *            the client to set
+	 * @param carId the carId to set
 	 */
-	public void setClient(Client client) {
-		this.client = client;
+	public void setCarId(int carId) {
+		this.carId = carId;
 	}
 
 	/**
@@ -83,7 +82,7 @@ public class Order {
 	/**
 	 * @return the time
 	 */
-	public Time getTime() {
+	public String getTime() {
 		return time;
 	}
 
@@ -91,14 +90,14 @@ public class Order {
 	 * @param time
 	 *            the time to set
 	 */
-	public void setTime(Time time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
 	/**
 	 * @return the distance
 	 */
-	public int getDistance() {
+	public float getDistance() {
 		return distance;
 	}
 
@@ -106,7 +105,7 @@ public class Order {
 	 * @param distance
 	 *            the distance to set
 	 */
-	public void setDistance(int distance) {
+	public void setDistance(float distance) {
 		this.distance = distance;
 	}
 

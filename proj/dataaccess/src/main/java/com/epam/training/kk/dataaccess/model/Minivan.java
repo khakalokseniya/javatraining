@@ -6,7 +6,7 @@ public class Minivan extends Car{
 		super.setActivity(true);
 		super.setCallsign(getCallsign());
 		super.setColor(getColor());;
-		super.setDriver(getDriver());
+		super.setDriverId(getDriverId());
 		super.setId(getId());
 		super.setYear(getYear());
 		super.getRegistrationNumber();
@@ -14,7 +14,7 @@ public class Minivan extends Car{
 		super.getBrand();
 		super.getCallsign();
 		super.getColor();
-		super.getDriver();
+		super.getDriverId();
 		super.getId();
 	}
 

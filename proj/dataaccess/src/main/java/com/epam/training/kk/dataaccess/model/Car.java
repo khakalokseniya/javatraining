@@ -8,10 +8,10 @@ public class Car {
 	private String color;
 	private int year;
 	private String callsign;
-	private Driver driver;
+	private Long driverId;
 	boolean activity;
 	
-	public Car(String brand, String model, String registrationNumber){
+	public Car(String registrationNumber, String brand, String model){
 		this.brand = brand;
 		this.model = model;
 		this.registrationNumber = registrationNumber;
@@ -115,19 +115,7 @@ public class Car {
 		this.callsign = callsign;
 	}
 
-	/**
-	 * @return the driver
-	 */
-	public Driver getDriver() {
-		return driver;
-	}
-
-	/**
-	 * @param driver the driver to set
-	 */
-	public void setDriver(Driver driver) {
-		this.driver = driver;
-	}
+	
 
 	/**
 	 * @return the activity
@@ -141,6 +129,14 @@ public class Car {
 	 */
 	public void setActivity(boolean activity) {
 		this.activity = activity;
+	}
+
+	public Long getDriverId() {
+		return driverId;
+	}
+
+	public void setDriverId(Long driverId) {
+		this.driverId = driverId;
 	}
 
 }

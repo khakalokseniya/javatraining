@@ -6,28 +6,27 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.epam.training.kk.dataaccess.model.Car;
-import com.epam.training.kk.dataaccess.model.Driver;
 
 public final class CarMapper implements RowMapper<Car> {
 	
 	@Override
 	public Car mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Long id = rs.getLong("Car_id");
+		Long id = rs.getLong("id");
 		String registrationNumber = rs.getString("registration_number");
 		String brand = rs.getString("brand");
 		String model = rs.getString("model");
 		String color = rs.getString("color");
 		int year = rs.getInt("year");
 		String callsign = rs.getString("callsign");
+		long driverId = rs.getLong("driver_id");
 		boolean activity = rs.getBoolean("activity");
-		Driver driver = (Driver) rs.getObject("driver");
-		Car car = new Car(brand, model, registrationNumber);
-		car.setActivity(activity);
-		car.setCallsign(callsign);
+		Car car = new Car(registrationNumber, brand, model);
 		car.setColor(color);
-		car.setDriver(driver);
-		car.setId(id);
 		car.setYear(year);
+		car.setCallsign(callsign);
+		car.setDriverId(driverId);
+		car.setActivity(activity);
+		car.setId(id);
 		return car;
 	}
 }

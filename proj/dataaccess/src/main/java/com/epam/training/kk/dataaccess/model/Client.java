@@ -1,7 +1,7 @@
 package com.epam.training.kk.dataaccess.model;
 
 public class Client {
-	private Long id = (long) 0;
+	private Long id;
 	private String fullName;
 	private String phoneNumber;
 	private String address;

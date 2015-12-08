@@ -13,15 +13,15 @@ import com.epam.training.kk.dataaccess.model.Order;
 public final class OrderMapper implements RowMapper<Order> {
 	@Override
 	public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Long id = rs.getLong("Order_id");
-		Client client = (Client) rs.getObject("client");
-		Car car = (Car) rs.getObject("car");
+		Long id = rs.getLong("id");
+		int clientId = rs.getInt("client_id");
+		int carId = rs.getInt("car_id");
 		String address = rs.getString("address");
-		int distance = rs.getInt("distance");
+		String time = rs.getString("time");
+		float distance = rs.getFloat("distance");
 		int price = rs.getInt("price");
 		boolean isCompleted = rs.getBoolean("is_completed");
-		Time timeOfDeparture = rs.getTime("time_of_departure");
-		Order order = new Order(client, car, address, timeOfDeparture);
+		Order order = new Order(clientId, carId, address, time);
 		order.setId(id);
 		order.setDistance(distance);
 		order.setPrice(price);

@@ -13,7 +13,6 @@ import com.epam.training.kk.dataaccess.model.Minivan;
 
 @Repository
 public class MinivanDaoImpl implements MinivanDao {
-	public static long ID_GEN;
 
 	private static Map<Long, Minivan> TABLE_MINIVANS = new HashMap<Long, Minivan>();
 
@@ -35,7 +34,7 @@ public class MinivanDaoImpl implements MinivanDao {
 						minivan.getBrand(), minivan.getModel(),
 						minivan.getRegistrationNumber(), minivan.getColor(),
 						minivan.getYear(), minivan.getCallsign(),
-						minivan.getDriver(), minivan.getActivity());
+						minivan.getDriverId(), minivan.getActivity());
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class MinivanDaoImpl implements MinivanDao {
 		existingMinivan.setColor(minivan.getColor());
 		existingMinivan.setYear(minivan.getYear());
 		existingMinivan.setCallsign(minivan.getCallsign());
-		existingMinivan.setDriver(minivan.getDriver());
+		existingMinivan.setDriverId(minivan.getDriverId());
 		existingMinivan.setActivity(minivan.getActivity());
 	}
 

@@ -16,7 +16,7 @@ public final class DriverMapper implements RowMapper<Driver> {
 		String phoneNumber = rs.getString("phone_number");
 		String address = rs.getString("address");
 		Date startingDate = rs.getDate("starting_date");
-		String certificate = rs.getString("cetrificate");
+		String certificate = rs.getString("certificate");
 		Driver driver = new Driver(fullName, phoneNumber, address);
 		driver.setId(id);
 		driver.setStartingDate(startingDate);

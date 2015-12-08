@@ -81,3 +81,14 @@ SE_03/2/.project
 SE_03/2/.settings/org.eclipse.core.resources.prefs
 SE_03/2/.settings/org.eclipse.jdt.core.prefs
 SE_03/2/.settings/org.eclipse.m2e.core.prefs
+SE_04/4/.settings/org.eclipse.m2e.core.prefs
+SE_04/4/.settings/org.eclipse.jdt.core.prefs
+*.project
+*.gitignore
+*.classpath
+*.prefs
+*.container
+*.xml
+*.component
+*.jsdtscope
+*.name

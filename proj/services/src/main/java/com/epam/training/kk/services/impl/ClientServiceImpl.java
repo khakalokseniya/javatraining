@@ -1,5 +1,7 @@
 package com.epam.training.kk.services.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,9 @@ import com.epam.training.kk.services.ClientService;
 @Service
 public class ClientServiceImpl implements ClientService {
 
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(ClientServiceImpl.class);
+
 	@Autowired
 	private ClientDao clientDao;
 
@@ -19,11 +24,29 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public void insertOrUpdate(Client client) {
+	public Long insert(Client client) {
+		Long id = null;
 		if (client.getId() == null) {
-			clientDao.insert(client);
-		} else {
-			clientDao.update(client);
+			id = clientDao.insert(client);
+			LOGGER.info("new client created. id: {}", id);
+		}else{
+			System.out.println("Клиент уже существует");
 		}
+		return id;
+	}
+
+	@Override
+	public Long update(String fullName, String phoneNumber, String address,
+			int discont, Long id) {
+		clientDao.update(fullName, phoneNumber, address, discont, id);
+		LOGGER.info("client {} updated", id);
+		return id;
+	}
+
+	@Override
+	public void delete(Long id) {
+		clientDao.delete(id);
+		LOGGER.info("client deleted. id: {}", id);
+		return;
 	}
 }

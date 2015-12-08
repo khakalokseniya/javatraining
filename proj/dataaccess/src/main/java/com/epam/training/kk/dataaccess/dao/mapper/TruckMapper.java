@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.epam.training.kk.dataaccess.model.Car;
-import com.epam.training.kk.dataaccess.model.Driver;
 import com.epam.training.kk.dataaccess.model.Truck;
 
 public final class TruckMapper implements RowMapper<Truck> {
@@ -21,12 +20,12 @@ public final class TruckMapper implements RowMapper<Truck> {
 		int year = rs.getInt("year");
 		String callsign = rs.getString("callsign");
 		boolean activity = rs.getBoolean("activity");
-		Driver driver = (Driver) rs.getObject("driver");
+		long driverId = rs.getLong("driver_id");
 		Car car = new Truck(brand, model, registrationNumber);
 		car.setActivity(activity);
 		car.setCallsign(callsign);
 		car.setColor(color);
-		car.setDriver(driver);
+		car.setDriverId(driverId);
 		car.setId(id);
 		car.setYear(year);
 		return (Truck) car;

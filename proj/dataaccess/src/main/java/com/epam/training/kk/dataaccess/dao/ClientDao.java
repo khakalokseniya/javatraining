@@ -5,8 +5,11 @@ import com.epam.training.kk.dataaccess.model.Client;
 public interface ClientDao {
 	Client getById(Long id);
 
-	void insert(Client client);
+	Long insert(Client client);
 
-	void update(Client client);
+	void update(String fullName, String phoneNumber, String address,
+			int discont, Long id);
+
+	void delete(Long id);
 
 }

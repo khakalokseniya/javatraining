@@ -12,7 +12,6 @@ import com.epam.training.kk.dataaccess.dao.mapper.PassengerCarMapper;
 import com.epam.training.kk.dataaccess.model.PassengerCar;
 @Repository
 public class PassengerCarDaoImpl implements PassengerCarDao {
-	public static long ID_GEN;
 
 	private static Map<Long, PassengerCar> TABLE_PASSENGER_CARS = new HashMap<Long, PassengerCar>();
 
@@ -33,7 +32,7 @@ public class PassengerCarDaoImpl implements PassengerCarDao {
 						+ "color, year, callsign, driver, activity VALUES (?,?,?,?,?,?,?,?)",
 						car.getBrand(), car.getModel(),
 						car.getRegistrationNumber(), car.getColor(),
-						car.getYear(), car.getCallsign(), car.getDriver(),
+						car.getYear(), car.getCallsign(), car.getDriverId(),
 						car.getActivity());
 	}
 
@@ -46,7 +45,7 @@ public class PassengerCarDaoImpl implements PassengerCarDao {
 		existingCar.setColor(car.getColor());
 		existingCar.setYear(car.getYear());
 		existingCar.setCallsign(car.getCallsign());
-		existingCar.setDriver(car.getDriver());
+		existingCar.setDriverId(car.getDriverId());
 		existingCar.setActivity(car.getActivity());
 	}
 
