@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -24,11 +25,15 @@ public class DriverDaoImpl implements DriverDao {
 
 	@Override
 	public Driver getById(Long id) {
+		Driver driver = new Driver(null, null, null);
+		try{
 		String sql = "SELECT * FROM \"Driver\" WHERE id = ?";
 		 
-		Driver driver = (Driver)jdbcTemplate.queryForObject(
+		driver = jdbcTemplate.queryForObject(
 				sql, new Object[] { id }, new DriverMapper());
-			
+		}catch(DataAccessException e){
+			driver = null;
+		}
 		return driver;
 	}
 

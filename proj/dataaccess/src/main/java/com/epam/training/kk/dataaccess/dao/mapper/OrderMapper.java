@@ -18,7 +18,7 @@ public final class OrderMapper implements RowMapper<Order> {
 		int carId = rs.getInt("car_id");
 		String address = rs.getString("address");
 		String time = rs.getString("time");
-		float distance = rs.getFloat("distance");
+		double distance = rs.getFloat("distance");
 		int price = rs.getInt("price");
 		boolean isCompleted = rs.getBoolean("is_completed");
 		Order order = new Order(clientId, carId, address, time);

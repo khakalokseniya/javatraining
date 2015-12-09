@@ -1,16 +1,14 @@
 package com.epam.training.kk.dataaccess.model;
 
-import java.sql.Time;
-
 public class Order {
 	private Long id;
 	private int clientId;
 	private int carId;
 	private String address;
 	private String time;
-	private float distance;
+	private double distance;
 	private int price;
-	boolean isCompleted;
+	boolean isCompleted = true;
 
 	public Order(int clientId, int carId, String address, String time) {
 		this.clientId = clientId;
@@ -34,8 +32,6 @@ public class Order {
 		this.id = id;
 	}
 
-	
-
 	/**
 	 * @return the clientId
 	 */
@@ -44,7 +40,8 @@ public class Order {
 	}
 
 	/**
-	 * @param clientId the clientId to set
+	 * @param clientId
+	 *            the clientId to set
 	 */
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
@@ -58,7 +55,8 @@ public class Order {
 	}
 
 	/**
-	 * @param carId the carId to set
+	 * @param carId
+	 *            the carId to set
 	 */
 	public void setCarId(int carId) {
 		this.carId = carId;
@@ -97,7 +95,7 @@ public class Order {
 	/**
 	 * @return the distance
 	 */
-	public float getDistance() {
+	public double getDistance() {
 		return distance;
 	}
 
@@ -105,7 +103,7 @@ public class Order {
 	 * @param distance
 	 *            the distance to set
 	 */
-	public void setDistance(float distance) {
+	public void setDistance(double distance) {
 		this.distance = distance;
 	}
 

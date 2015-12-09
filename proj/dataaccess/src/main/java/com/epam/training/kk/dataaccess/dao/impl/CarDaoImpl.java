@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.epam.training.kk.dataaccess.dao.CarDao;
 import com.epam.training.kk.dataaccess.dao.mapper.CarMapper;
 import com.epam.training.kk.dataaccess.model.Car;
+import com.epam.training.kk.dataaccess.model.Car.Type;
 
 @Repository
 public class CarDaoImpl implements CarDao {
@@ -23,9 +25,15 @@ public class CarDaoImpl implements CarDao {
 
 	@Override
 	public Car getById(Long id) {
+		Car car = new Car(null, null, null, null, null, 0, null, id);
+		try{
 		return jdbcTemplate.queryForObject(
 				"select * from \"Car\" where id = ?", new Object[] { id },
 				new CarMapper());
+		}catch(DataAccessException e){
+			car = null;
+		}
+		return car;
 	}
 
 	@Override
@@ -36,17 +44,18 @@ public class CarDaoImpl implements CarDao {
 			public PreparedStatement createPreparedStatement(
 					Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(
-								"INSERT INTO \"Car\" (registration_number, brand, model,"
-										+ "color, year, callsign, driver_id, activity) VALUES (?,?,?,?,?,?,?,?)",
+								"INSERT INTO \"Car\" (registration_number, brand, model, type,"
+										+ "color, year, callsign, driver_id, activity) VALUES (?,?,?,?,?,?,?,?,?)",
 								new String[] { "id" });
 				ps.setString(1,  car.getRegistrationNumber());
 				ps.setString(2, car.getBrand());
 				ps.setString(3, car.getModel());
-				ps.setString(4, car.getColor());
-				ps.setInt(5, car.getYear());
-				ps.setString(6, car.getCallsign());
-				ps.setLong(7, car.getDriverId());
-				ps.setBoolean(8, car.getActivity());
+				ps.setString(4, car.getType().name());
+				ps.setString(5, car.getColor());
+				ps.setInt(6, car.getYear());
+				ps.setString(7, car.getCallsign());
+				ps.setLong(8, car.getDriverId());
+				ps.setBoolean(9, car.getActivity());
 				return ps;
 			}
 		}, keyHolder);
@@ -54,11 +63,12 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-		public void update(String registrationNumber, String brand, String model,  String color, int year,
-				String callsign, Long driverId, Boolean activity, Long id) {
-			String sqlUpdate = "UPDATE \"Car\" set registration_number=?, brand=?, model=?, color=?,"
+		public void update(String registrationNumber, String brand, String model,  Type type, String color,
+				int year, String callsign, Long driverId, Boolean activity, Long id) {
+		String stype = type.name();
+			String sqlUpdate = "UPDATE \"Car\" set registration_number=?, brand=?, model=?, type=?, color=?,"
 									+ "year=?, callsign=?, driver_id=?, activity=? where id=?";
-	        jdbcTemplate.update(sqlUpdate, registrationNumber, brand, model, color, 
+	        jdbcTemplate.update(sqlUpdate, registrationNumber, brand, model, stype, color, 
 	        		year,callsign, driverId, activity, id);
 	        return;
 		

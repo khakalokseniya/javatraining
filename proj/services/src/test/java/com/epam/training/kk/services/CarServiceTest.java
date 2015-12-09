@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-import java.text.ParseException;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.epam.training.kk.dataaccess.model.Car;
+import com.epam.training.kk.dataaccess.model.Car.Type;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-db-context.xml")
@@ -27,11 +25,7 @@ public class CarServiceTest {
 
 	@Before
 	public void init() {
-		car = new Car("regNumber", "brand", "model");
-		car.setColor("black");
-		car.setYear(2011);
-		car.setCallsign("callsign");
-		car.setDriverId(112l);
+		car = new Car("regNumber", "brand", "model", Type.MINIVAN, "black", 2011, "callsign", 112l);
 		car.setActivity(true);
 	}
 
@@ -44,8 +38,7 @@ public class CarServiceTest {
 	@Test
 	public void updateCarTest() {
 		Long id = service.insert(car);
-		service.update("Izmenen", "bbb", "mmm", "color", 2012, "callsign",
-				112l, false, id);
+		service.update("Izmenen", "brand", "model", Type.MINIVAN, "black", 2011, "callsign", 112l, true, id);
 		assertEquals("Izmenen", service.get(id).getRegistrationNumber());
 	}
 
@@ -55,7 +48,7 @@ public class CarServiceTest {
 		Car d = service.get(id);
 		assertNotNull(d);
 		service.delete(id);
-		assertNull(d);
+		assertNull(service.get(id));
 	}
 
 	@Test

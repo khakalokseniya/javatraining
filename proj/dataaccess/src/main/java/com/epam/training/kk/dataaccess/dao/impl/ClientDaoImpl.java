@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -23,9 +24,15 @@ public class ClientDaoImpl implements ClientDao {
 
 	@Override
 	public Client getById(Long id) {
-		return jdbcTemplate.queryForObject(
+		Client client = new Client(null, null, null);
+		try{
+			return jdbcTemplate.queryForObject(
 				"select * from \"Client\" where id = ?", new Object[] { id },
 				new ClientMapper());
+		}catch(DataAccessException e){
+			client = null;
+		}
+		return client;
 	}
 
 	@Override

@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 
 import java.text.ParseException;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +26,6 @@ public class ClientServiceTest {
 	public void init() {
 		client = new Client("NEW CLIENT", "+123456", "Grodno");
 		client.setDiscont(5);
-		Long id = service.insert(client);
-
 	}
 
 	@Test
@@ -51,7 +47,7 @@ public class ClientServiceTest {
 		Long id = service.insert(client);
 		assertNotNull(service.get(id));
 		service.delete(id);
-		assertNull(service.get(id)); // доделать!!!!!
+		assertNull(service.get(id)); 
 	}
 
 	@Test

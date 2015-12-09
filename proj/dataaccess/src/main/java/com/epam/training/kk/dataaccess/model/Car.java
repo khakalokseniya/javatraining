@@ -5,16 +5,24 @@ public class Car {
 	private String registrationNumber;
 	private String brand;
 	private String model;
+	private Type type;
 	private String color;
 	private int year;
 	private String callsign;
 	private Long driverId;
 	boolean activity;
+	public enum Type {PASSENGER_CAR, MINIVAN, TRUCK};
 	
-	public Car(String registrationNumber, String brand, String model){
+	public Car(String registrationNumber, String brand, String model, Type type, String color,
+			int year, String callsign, Long driverId){
 		this.brand = brand;
 		this.model = model;
 		this.registrationNumber = registrationNumber;
+		this.type= type;
+		this.color = color;
+		this.year = year;
+		this.callsign = callsign;
+		this.driverId = driverId;
 	}
 
 	/**
@@ -137,6 +145,14 @@ public class Car {
 
 	public void setDriverId(Long driverId) {
 		this.driverId = driverId;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 }

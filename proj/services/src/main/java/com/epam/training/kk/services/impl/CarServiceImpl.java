@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.epam.training.kk.dataaccess.dao.CarDao;
 import com.epam.training.kk.dataaccess.model.Car;
+import com.epam.training.kk.dataaccess.model.Car.Type;
 import com.epam.training.kk.services.CarService;
 
 @Service
@@ -38,10 +39,10 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public Long update(String registrationNumber, String brand, String model,
+	public Long update(String registrationNumber, String brand, String model, Type type,
 			String color, int year, String callsign, Long driverId,
 			boolean activity, Long id) {
-		carDao.update(registrationNumber, brand, model,
+		carDao.update(registrationNumber, brand, model, type,
 				color, year, callsign, driverId,
 				activity, id);
 		LOGGER.info("driver {} updated", id);
