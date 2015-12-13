@@ -88,7 +88,6 @@ SE_04/4/.settings/org.eclipse.jdt.core.prefs
 *.classpath
 *.prefs
 *.container
-*.xml
 *.component
 *.jsdtscope
 *.name
