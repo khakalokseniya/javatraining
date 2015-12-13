@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<h1>Orders page</h1>
+	<form wicket:id="form">
+		<table>
+			<tr>
+				<td><label>Phone number:</label></td>
+				<td><input wicket:id="phone_number" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>Address:</label></td>
+				<td><input wicket:id="address" type="text" /></td>
+			</tr>
+
+			<tr>
+				<td colspan="2"><button type="submit" wicket:id="submit-button">Добавить клиента</button></td>
+			</tr>
+		</table>
+	</form>
+</wicket:extend>

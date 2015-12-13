@@ -9,6 +9,7 @@ public interface ClientService {
 
 	void delete(Long id);
 
-	Long update(String fullName, String phoneNumber, String address,
-			int discont, Long id);
+	Long update(String phoneNumber, String address,	int discont, Long id);
+	
+	
 }

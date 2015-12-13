@@ -24,9 +24,9 @@ public class ClientDaoImpl implements ClientDao {
 
 	@Override
 	public Client getById(Long id) {
-		Client client = new Client(null, null, null);
+		Client client = new Client(null, null);
 		try{
-			return jdbcTemplate.queryForObject(
+			client =  jdbcTemplate.queryForObject(
 				"select * from \"Client\" where id = ?", new Object[] { id },
 				new ClientMapper());
 		}catch(DataAccessException e){
@@ -43,12 +43,11 @@ public class ClientDaoImpl implements ClientDao {
 			public PreparedStatement createPreparedStatement(
 					Connection connection) throws SQLException {
 				PreparedStatement ps = connection.prepareStatement(
-						"INSERT INTO \"Client\" (full_name, phone_number, address,"
-								+ "discont) VALUES (?,?,?,?)", new String[] { "id" });
-				ps.setString(1, client.getFullName());
-				ps.setString(2, client.getPhoneNumber());
-				ps.setString(3, client.getAddress());
-				ps.setInt(4, client.getDiscont());
+						"INSERT INTO \"Client\" (phone_number, address,"
+								+ "discont) VALUES (?,?,?)", new String[] { "id" });
+				ps.setString(1, client.getPhoneNumber());
+				ps.setString(2, client.getAddress());
+				ps.setInt(3, client.getDiscont());
 				return ps;
 			}
 		}, keyHolder);
@@ -56,11 +55,10 @@ public class ClientDaoImpl implements ClientDao {
 	}
 
 	@Override
-	public void update(String fullName, String phoneNumber, String address,
-			int discont, Long id) {
-		String sqlUpdate = "UPDATE \"Client\" set full_name=?, phone_number=?, address=?,"
+	public void update(String phoneNumber, String address, int discont, Long id) {
+		String sqlUpdate = "UPDATE \"Client\" set phone_number=?, address=?,"
 				+ "discont=? where id=?";
-		jdbcTemplate.update(sqlUpdate, fullName, phoneNumber, address, discont,
+		jdbcTemplate.update(sqlUpdate, phoneNumber, address, discont,
 				id);
 		return;
 	}

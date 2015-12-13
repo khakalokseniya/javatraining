@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.epam.training.kk.webapp.page.HomePage;
+import com.epam.training.kk.webapp.page.orders.OrdersPage;
 
 /**
  * Application object for your web application. If you want to run this
@@ -26,7 +26,7 @@ public class WicketApplication extends WebApplication {
 	 */
 	@Override
 	public Class<? extends WebPage> getHomePage() {
-		return HomePage.class;
+		return OrdersPage.class;
 	}
 
 	/**

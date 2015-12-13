@@ -24,7 +24,7 @@ public class ClientServiceTest {
 
 	@Before
 	public void init() {
-		client = new Client("NEW CLIENT", "+123456", "Grodno");
+		client = new Client("+123456", "Grodno");
 		client.setDiscont(5);
 	}
 
@@ -38,8 +38,8 @@ public class ClientServiceTest {
 	@Test
 	public void updateClientTest() {
 		Long id = service.insert(client);
-		service.update("Izmenen", "+375291234655", "Grodno", 10, id);
-		assertEquals("Izmenen", service.get(id).getFullName());
+		service.update("Izmenen", "Grodno", 10, id);
+		assertEquals("Izmenen", service.get(id).getPhoneNumber());
 	}
 
 	@Test

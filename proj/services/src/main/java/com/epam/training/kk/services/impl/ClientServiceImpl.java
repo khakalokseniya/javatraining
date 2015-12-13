@@ -36,9 +36,9 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public Long update(String fullName, String phoneNumber, String address,
+	public Long update(String phoneNumber, String address,
 			int discont, Long id) {
-		clientDao.update(fullName, phoneNumber, address, discont, id);
+		clientDao.update(phoneNumber, address, discont, id);
 		LOGGER.info("client {} updated", id);
 		return id;
 	}

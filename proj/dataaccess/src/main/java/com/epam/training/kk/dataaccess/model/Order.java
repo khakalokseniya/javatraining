@@ -2,15 +2,15 @@ package com.epam.training.kk.dataaccess.model;
 
 public class Order {
 	private Long id;
-	private int clientId;
-	private int carId;
+	private Long clientId;
+	private Long carId;
 	private String address;
 	private String time;
 	private double distance;
 	private int price;
 	boolean isCompleted = true;
 
-	public Order(int clientId, int carId, String address, String time) {
+	public Order(Long clientId, Long carId, String address, String time) {
 		this.clientId = clientId;
 		this.carId = carId;
 		this.address = address;
@@ -35,7 +35,7 @@ public class Order {
 	/**
 	 * @return the clientId
 	 */
-	public int getClientId() {
+	public Long getClientId() {
 		return clientId;
 	}
 
@@ -43,14 +43,14 @@ public class Order {
 	 * @param clientId
 	 *            the clientId to set
 	 */
-	public void setClientId(int clientId) {
+	public void setClientId(Long clientId) {
 		this.clientId = clientId;
 	}
 
 	/**
 	 * @return the carId
 	 */
-	public int getCarId() {
+	public Long getCarId() {
 		return carId;
 	}
 
@@ -58,7 +58,7 @@ public class Order {
 	 * @param carId
 	 *            the carId to set
 	 */
-	public void setCarId(int carId) {
+	public void setCarId(Long carId) {
 		this.carId = carId;
 	}
 

@@ -24,7 +24,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Order getById(Long id) {
-		Order order = new Order(0, 0, null, null);
+		Order order = new Order(0l, 0l, null, null);
 		try {
 			return jdbcTemplate.queryForObject(
 					"select * from \"Order\" where id = ?",
@@ -37,7 +37,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Order getFromHistory(Long id) {
-		Order order = new Order(0, 0, null, null);
+		Order order = new Order(0l, 0l, null, null);
 		try {
 			return jdbcTemplate.queryForObject(
 					"select * from \"HistoryOfOrders\" where id = ?",
@@ -60,8 +60,8 @@ public class OrderDaoImpl implements OrderDao {
 								"INSERT INTO \"Order\" (client_id, car_id, address, time, distance, price, is_completed"
 										+ ") VALUES (?,?,?,?,?,?,?)",
 								new String[] { "id" });
-				ps.setInt(1, order.getClientId());
-				ps.setInt(2, order.getCarId());
+				ps.setLong(1, order.getClientId());
+				ps.setLong(2, order.getCarId());
 				ps.setString(3, order.getAddress());
 				ps.setString(4, order.getTime());
 				ps.setDouble(5, order.getDistance());
@@ -85,8 +85,8 @@ public class OrderDaoImpl implements OrderDao {
 								"INSERT INTO \"HistoryOfOrders\" (client_id, car_id, address, time, distance, price, is_completed"
 										+ ") VALUES (?,?,?,?,?,?,?)",
 								new String[] { "id" });
-				ps.setInt(1, order.getClientId());
-				ps.setInt(2, order.getCarId());
+				ps.setLong(1, order.getClientId());
+				ps.setLong(2, order.getCarId());
 				ps.setString(3, order.getAddress());
 				ps.setString(4, order.getTime());
 				ps.setDouble(5, order.getDistance());
@@ -99,7 +99,7 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public void update(Long id, int clientId, int carId, String address,
+	public void update(Long id, Long clientId, Long carId, String address,
 			String time, double distance, int price, boolean isCompleted) {
 		String sqlUpdate = "UPDATE \"Order\" set client_id=?, car_id=?, address=?, time=?,"
 				+ "distance=?, price=?, is_completed=? where id=?";

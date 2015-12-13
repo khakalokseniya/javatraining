@@ -10,8 +10,12 @@ public interface OrderService {
 
 	Long insert(Order order);
 
-	Long addToHistory(Order order);
+	Long addToHistoryAndUpdateClient(Order order);
 
-	void update(Long id, int clientId, int carId, String address, String time,
+	void update(Long id, Long clientId, Long carId, String address, String time,
 			double distance, int price, boolean isCompleted);
+	
+
+		
+	
 }

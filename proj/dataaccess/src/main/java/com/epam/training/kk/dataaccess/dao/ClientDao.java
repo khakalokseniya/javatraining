@@ -7,7 +7,7 @@ public interface ClientDao {
 
 	Long insert(Client client);
 
-	void update(String fullName, String phoneNumber, String address,
+	void update(String phoneNumber, String address,
 			int discont, Long id);
 
 	void delete(Long id);

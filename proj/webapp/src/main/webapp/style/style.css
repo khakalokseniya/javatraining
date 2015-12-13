@@ -93,12 +93,12 @@ ol li
 #header
 { background: #404040;
   border-bottom: 1px solid #FFF;
-  height: 250px;}
+  height: 232px;}
 
 #logo
 { width: 829px;
   position: relative;
-  height: 178px;
+  height: 160px;
   background: url(logo.png) no-repeat;}
 
 #logo #logo_text 
@@ -139,7 +139,7 @@ ol li
   color: #999;}
 
 #menubar
-{ width: 875px;
+{ width: 451px;
   height: 71px;
   padding: 0px 0 0 0px;
   border: 1px solid #6A6A6A;

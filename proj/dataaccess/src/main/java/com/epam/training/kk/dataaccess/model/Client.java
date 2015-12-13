@@ -2,13 +2,11 @@ package com.epam.training.kk.dataaccess.model;
 
 public class Client {
 	private Long id;
-	private String fullName;
 	private String phoneNumber;
 	private String address;
 	private int discont;
 	
-	public Client(String fullName, String phoneNumber, String address){
-		this.fullName = fullName;
+	public Client(String phoneNumber, String address){
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 	}
@@ -27,19 +25,6 @@ public class Client {
 		this.id = id;
 	}
 
-	/**
-	 * @return the fullName
-	 */
-	public String getFullName() {
-		return fullName;
-	}
-
-	/**
-	 * @param fullName the fullName to set
-	 */
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
 
 	/**
 	 * @return the phoneNumber

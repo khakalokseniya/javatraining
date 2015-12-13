@@ -9,7 +9,7 @@ public interface OrderDao {
 
 	void delete(Long id);
 
-	void update(Long id, int clientId, int carId, String address, String time,
+	void update(Long id, Long clientId, Long carId, String address, String time,
 			double distance, int price, boolean isCompleted);
 
 	Long addToHistory(Order order);

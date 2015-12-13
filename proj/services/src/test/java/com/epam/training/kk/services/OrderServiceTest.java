@@ -28,7 +28,10 @@ public class OrderServiceTest {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		String time = sdf.format(cal.getTime());
-		order = new Order(1, 10, "Grodno", time);
+		order = new Order(10l, 10l, "Grodno", time);
+		order.setCompleted(true);
+		order.setDistance(10);
+		order.setPrice(15000);
 	}
 
 	@Test
@@ -40,7 +43,7 @@ public class OrderServiceTest {
 
 	@Test
 	public void creationHistoryRowTest() {
-		Long id = service.addToHistory(order);
+		Long id = service.addToHistoryAndUpdateClient(order);
 		Order o = service.getFromHistory(id);
 		assertNotNull(o);
 	}
@@ -48,7 +51,7 @@ public class OrderServiceTest {
 	@Test
 	public void updateOrderTest() {
 		Long id = service.insert(order);
-		service.update(id, 1, 11, "Minsk", null, 0, 0, false);
+		service.update(id, 1l, 11l, "Minsk", null, 0, 0, false);
 		assertEquals("Minsk", service.get(id).getAddress());
 	}
 
@@ -60,7 +63,7 @@ public class OrderServiceTest {
 
 	@Test
 	public void getHistoryOrderTest() {
-		Long id = service.addToHistory(order);
+		Long id = service.addToHistoryAndUpdateClient(order);
 		assertNotNull(service.getFromHistory(id));
 	}
 }

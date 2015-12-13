@@ -9,11 +9,10 @@ public final class ClientMapper implements RowMapper<Client> {
 	@Override
 	public Client mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Long id = rs.getLong("id");
-		String fullName = rs.getString("full_name");
 		String phoneNumber = rs.getString("phone_number");
 		String address = rs.getString("address");
 		int discont = rs.getInt("discont");
-		Client client = new Client(fullName, phoneNumber, address);
+		Client client = new Client(phoneNumber, address);
 		client.setId(id);
 		client.setDiscont(discont);
 		return client;
