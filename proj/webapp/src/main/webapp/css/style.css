@@ -175,7 +175,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 { color: #FFF;}
 
 #site_content
-{ width: 845px;
+{ width: 1200px;
   overflow: hidden;
   margin: 0 auto 0 auto;
   padding: 25px 20px 20px 33px;
@@ -183,11 +183,11 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 
 .sidebar
 { float: right;
-  width: 190px;
+  width: 300px;
   padding: 0 15px 20px 15px;}
 
 .sidebar ul
-{ width: 178px; 
+{ width: 10px; 
   padding: 4px 0 0 0; 
   margin: 4px 0 30px 0;}
 

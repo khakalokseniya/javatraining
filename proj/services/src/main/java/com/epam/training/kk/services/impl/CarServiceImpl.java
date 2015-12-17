@@ -1,8 +1,10 @@
 package com.epam.training.kk.services.impl;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.epam.training.kk.dataaccess.dao.CarDao;
@@ -17,6 +19,8 @@ public class CarServiceImpl implements CarService {
 
 	@Autowired
 	private CarDao carDao;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public Car get(Long id) {
@@ -39,14 +43,13 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public Long update(String registrationNumber, String brand, String model, Type type,
-			String color, int year, String callsign, Long driverId,
+	public Long update(String registrationNumber, String brand, String model,
+			Type type, String color, int year, String callsign, Long driverId,
 			boolean activity, Long id) {
-		carDao.update(registrationNumber, brand, model, type,
-				color, year, callsign, driverId,
-				activity, id);
+		carDao.update(registrationNumber, brand, model, type, color, year,
+				callsign, driverId, activity, id);
 		LOGGER.info("driver {} updated", id);
 		return id;
 	}
-	
+
 }

@@ -23,46 +23,45 @@ public class ClientDaoImpl implements ClientDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public Client getById(Long id) {
+	public Client getByPhone(String phoneNumber) {
 		Client client = new Client(null, null);
-		try{
-			client =  jdbcTemplate.queryForObject(
-				"select * from \"Client\" where id = ?", new Object[] { id },
-				new ClientMapper());
-		}catch(DataAccessException e){
+		try {
+			client = jdbcTemplate.queryForObject(
+					"select * from \"Client\" where phone_number = ?",
+					new Object[] { phoneNumber }, new ClientMapper());
+		} catch (DataAccessException e) {
 			client = null;
 		}
 		return client;
 	}
 
 	@Override
-	public Long insert(final Client client) {
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		jdbcTemplate.update(new PreparedStatementCreator() {
-			@Override
-			public PreparedStatement createPreparedStatement(
-					Connection connection) throws SQLException {
-				PreparedStatement ps = connection.prepareStatement(
-						"INSERT INTO \"Client\" (phone_number, address,"
-								+ "discont) VALUES (?,?,?)", new String[] { "id" });
-				ps.setString(1, client.getPhoneNumber());
-				ps.setString(2, client.getAddress());
-				ps.setInt(3, client.getDiscont());
-				return ps;
-			}
-		}, keyHolder);
-		return keyHolder.getKey().longValue();
+	public String insert(final Client client) {
+		String sql = "INSERT INTO \"Client\" (phone_number, address,"
+				+ "discont) VALUES (?,?,?)";
+
+		PreparedStatement ps = null;
+		try {
+			jdbcTemplate.update(sql, ps);
+			ps.setString(1, client.getPhoneNumber());
+			ps.setString(2, client.getAddress());
+			ps.setInt(3, client.getDiscont());
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return phoneNumber;
 	}
 
 	@Override
 	public void update(String phoneNumber, String address, int discont, Long id) {
 		String sqlUpdate = "UPDATE \"Client\" set phone_number=?, address=?,"
 				+ "discont=? where id=?";
-		jdbcTemplate.update(sqlUpdate, phoneNumber, address, discont,
-				id);
+		jdbcTemplate.update(sqlUpdate, phoneNumber, address, discont, id);
 		return;
 	}
-	
+
 	@Override
 	public void delete(Long id) {
 		jdbcTemplate.update("delete from \"Client\" where id = ?", id);

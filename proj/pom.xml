@@ -135,7 +135,7 @@
 				<version>${spring.version}</version>
 				<scope>test</scope>
 			</dependency>
-			
+
 			<!-- WICKET DEPENDENCIES -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
@@ -152,6 +152,12 @@
 				<artifactId>wicket-datetime</artifactId>
 				<version>${wicket.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-extensions</artifactId>
+				<version>7.1.0</version>
+			</dependency>
+
 
 
 

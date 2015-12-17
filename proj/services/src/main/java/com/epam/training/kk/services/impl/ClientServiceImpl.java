@@ -24,7 +24,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public Long insert(Client client) {
+	public Long insertOrUpdate(Client client) {
 		Long id = null;
 		if (client.getId() == null) {
 			id = clientDao.insert(client);

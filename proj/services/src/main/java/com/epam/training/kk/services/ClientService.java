@@ -3,7 +3,7 @@ package com.epam.training.kk.services;
 import com.epam.training.kk.dataaccess.model.Client;
 
 public interface ClientService {
-	Long insert(Client client);
+	Long insertOrUpdate(Client client);
 
 	Client get(Long id);
 
