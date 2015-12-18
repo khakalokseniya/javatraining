@@ -3,6 +3,7 @@ package com.epam.training.kk.dataaccess.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -13,7 +14,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.epam.training.kk.dataaccess.dao.OrderDao;
+import com.epam.training.kk.dataaccess.dao.mapper.CarMapper;
 import com.epam.training.kk.dataaccess.dao.mapper.OrderMapper;
+import com.epam.training.kk.dataaccess.model.Car;
 import com.epam.training.kk.dataaccess.model.Order;
 
 @Repository
@@ -111,6 +114,27 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public void delete(Long id) {
 		jdbcTemplate.update("delete from \"Order\" where id = ?", id);
+	}
+	
+	@Override
+	public List<Order> getAll(long first, long count) {
+		return jdbcTemplate.query(String.format(
+				"select * from \"Order\" order by  id limit %s offset %s ", count,
+				first), new OrderMapper());
+	}
+	
+	@Override
+	public List<Order> getAllFromHistory(long first, long count) {
+		return jdbcTemplate.query(String.format(
+				"select * from \"HistoryOfOrders\" order by  id limit %s offset %s ", count,
+				first), new OrderMapper());
+	}
+	
+	
+	@Override
+	public Integer getCount() {
+		return jdbcTemplate.queryForObject("select count(1) from \"Order\" ",
+				Integer.class);
 	}
 
 }

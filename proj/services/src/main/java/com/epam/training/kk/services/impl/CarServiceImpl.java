@@ -1,10 +1,10 @@
 package com.epam.training.kk.services.impl;
 
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.epam.training.kk.dataaccess.dao.CarDao;
@@ -19,8 +19,6 @@ public class CarServiceImpl implements CarService {
 
 	@Autowired
 	private CarDao carDao;
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public Car get(Long id) {
@@ -52,4 +50,13 @@ public class CarServiceImpl implements CarService {
 		return id;
 	}
 
+	@Override
+	public List<Car> getAll(long first, long count) {
+		return carDao.getAll(first, count);
+	}
+	
+	public Integer getCount() {
+		return carDao.getCount();
+
+	}
 }

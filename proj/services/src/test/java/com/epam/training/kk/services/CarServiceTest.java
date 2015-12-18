@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.epam.training.kk.dataaccess.model.Car;
+import com.epam.training.kk.dataaccess.model.Order;
 import com.epam.training.kk.dataaccess.model.Car.Type;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -58,4 +60,11 @@ public class CarServiceTest {
 		assertNotNull(service.get(id));
 	}
 	
+	@Test
+	public void getAllTest(){
+		List <Car> cars = service.getAll(1l, 1l);
+		for(int i = 0; i < cars.size(); i++){
+			assertNotNull(cars.get(i));
+		}
+	}
 }

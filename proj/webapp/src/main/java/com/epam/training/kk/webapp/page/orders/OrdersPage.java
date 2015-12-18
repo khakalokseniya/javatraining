@@ -1,143 +1,54 @@
 package com.epam.training.kk.webapp.page.orders;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
 import javax.inject.Inject;
 
-import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
-import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
-import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
-import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
-import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
-import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.markup.repeater.Item;
-import org.apache.wicket.markup.repeater.data.DataView;
-import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.validation.validator.StringValidator;
 
-import com.epam.training.kk.dataaccess.model.Car;
 import com.epam.training.kk.dataaccess.model.Client;
-import com.epam.training.kk.services.CarService;
 import com.epam.training.kk.services.ClientService;
 import com.epam.training.kk.services.OrderService;
 import com.epam.training.kk.webapp.page.abstractPage.AbstractPage;
-import com.epam.training.kk.webapp.page.history.HistoryPage;
+
+
 
 public class OrdersPage extends AbstractPage {
 
 	@Inject
-	private ClientService clientService;
-	@Inject
 	private OrderService orderService;
-	@Inject
-	private CarService carService;
+	private ClientService clientService;
 
 	public OrdersPage() {
 
 	}
-
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
-		add(new FeedbackPanel("feedback"));
+		Form<Object> form = new Form<>("form");
+		add(form);
 
-		Form<Object> orderForm = new Form<>("form-order");
-		add(orderForm);
-
-		final TextField<String> phoneField = new TextField<String>(
-				"phone_number", new Model<String>(""));
-		phoneField.setRequired(true);
-		phoneField.add(StringValidator.maximumLength(255));
-		orderForm.add(phoneField);
-		
+		final TextField<String> phoneField = new TextField<String>("phone_number",
+				new Model<String>(""));
+		form.add(phoneField);
 		final TextField<String> addressField = new TextField<String>("address",
 				new Model<String>(""));
-		addressField.setRequired(true);
-		addressField.add(StringValidator.maximumLength(255));
-		orderForm.add(addressField);
+		form.add(addressField);
 
-		
+	//	final Model<Boolean> isActiveModel = new Model<Boolean>(Boolean.TRUE);
+	//	form.add(new CheckBox("active", isActiveModel));
 
-		CarsDataProvider carsDataProvider = new CarsDataProvider();
-		DataView<Car> dataView = new DataView<Car>("cars-list",
-				carsDataProvider, 10) {
-			@Override
-			protected void populateItem(Item<Car> item) {
-				final Car car = item.getModelObject();
-				item.add(new Label("id"));
-				item.add(new Label("callsign", car.getCallsign()));
-
-				item.add(new Link("choose-link") {
-					@Override
-					public void onClick() {
-						setResponsePage(new HistoryPage());
-					}
-				});
-
-			}
-		};
-		dataView.add(new OrderByBorder<Object>("sortId", "id", carsDataProvider));
-		dataView.add(new OrderByBorder<Object>("sortCallsign", "callsign",
-				carsDataProvider));
-		orderForm.add(dataView);
-		orderForm.add(new PagingNavigator("paging", dataView));
-		orderForm.add(new SubmitLink("submit-button") {
+		form.add(new SubmitLink("submit-button") {
 			@Override
 			public void onSubmit() {
-				Client client = new Client(phoneField.getModelObject(),
-						addressField.getModelObject());
+				Client client = new Client(phoneField.getModelObject(), addressField.getModelObject());
 				client.setDiscont(5);
-				clientService.insert(client);
-			}
+				// TODO other fields
+				clientService.insert(client);		}
 		});
-		
-		
-		
-	}
-
-	private class CarsDataProvider extends SortableDataProvider<Car, Object> {
-
-		public CarsDataProvider() {
-			super();
-			setSort("id", SortOrder.ASCENDING);
-		}
-
-		@Override
-		public Iterator<? extends Car> iterator(long first, long count) {
-
-			SortParam<Object> sort = getSort();
-			ISortState<Object> sortState = getSortState();
-			SortOrder currentSort = sortState.getPropertySortOrder(sort
-					.getProperty());
-
-			System.out.println(sort.getProperty() + ":" + currentSort.name());
-			// TODO sort in service
-			return carService.getAll(first, count).iterator();
-		}
-
-		@Override
-		public long size() {
-			return carService.getCount();
-		}
-
-		@Override
-		public IModel<Car> model(Car object) {
-			return new CompoundPropertyModel<>(object);
-		}
 
 	}
+	
 }
-	
-	
-	

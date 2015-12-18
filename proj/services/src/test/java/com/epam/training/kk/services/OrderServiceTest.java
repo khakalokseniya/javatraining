@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.epam.training.kk.dataaccess.model.Driver;
 import com.epam.training.kk.dataaccess.model.Order;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,7 +30,7 @@ public class OrderServiceTest {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		String time = sdf.format(cal.getTime());
-		order = new Order(10l, 10l, "Grodno", time);
+		order = new Order(1l, 104l, "Grodno", time);
 		order.setCompleted(true);
 		order.setDistance(10);
 		order.setPrice(15000);
@@ -51,7 +53,7 @@ public class OrderServiceTest {
 	@Test
 	public void updateOrderTest() {
 		Long id = service.insert(order);
-		service.update(id, 1l, 11l, "Minsk", null, 0, 0, false);
+		service.update(id, 1l, 104l, "Minsk", null, 0, 0, false);
 		assertEquals("Minsk", service.get(id).getAddress());
 	}
 
@@ -64,6 +66,32 @@ public class OrderServiceTest {
 	@Test
 	public void getHistoryOrderTest() {
 		Long id = service.addToHistoryAndUpdateClient(order);
-		assertNotNull(service.getFromHistory(id));
+		assertNotNull(service.getFromHistory(id).toString());
+	}
+	
+	@Test
+	public void getAllTest(){
+		List <Order> orders= service.getAll(1l, 1l);
+		for(int i = 0; i < orders.size(); i++){
+			assertNotNull(orders.get(i));
+		}
+	}
+	
+	@Test
+	public void getAllFromHistoryTest(){
+		List <Order> orders= service.getAllFromHistory(1l, 1l);
+		for(int i = 0; i < orders.size(); i++){
+			assertNotNull(orders.get(i));
+		}
+	}
+	
+	@Test
+	public void deletingOrderTest() {
+		Long id = service.insert(order);
+		Order d = service.get(id);
+		assertNotNull(d);
+		service.delete(id);
+		assertNull(service.get(id));
 	}
 }
+

@@ -1,6 +1,7 @@
 package com.epam.training.kk.dataaccess.model;
 
 public class Client {
+	private Long id;
 	private String phoneNumber;
 	private String address;
 	private int discont;
@@ -10,6 +11,19 @@ public class Client {
 		this.address = address;
 	}
 
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 
 	/**

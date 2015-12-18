@@ -3,6 +3,7 @@ package com.epam.training.kk.dataaccess.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -77,5 +78,18 @@ public class CarDaoImpl implements CarDao {
 	@Override
 	public void delete(Long id) {
 		jdbcTemplate.update("delete from \"Car\" where id = ?", id);
+	}
+	
+	@Override
+	public List<Car> getAll(long first, long count) {
+		return jdbcTemplate.query(String.format(
+				"select * from \"Car\" order by  id limit %s offset %s ", count,
+				first), new CarMapper());
+	}
+	
+	@Override
+	public Integer getCount() {
+		return jdbcTemplate.queryForObject("select count(1) from \"Car\" ",
+				Integer.class);
 	}
 }

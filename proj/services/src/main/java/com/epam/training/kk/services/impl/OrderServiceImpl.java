@@ -1,12 +1,17 @@
 package com.epam.training.kk.services.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.epam.training.kk.dataaccess.dao.ClientDao;
 import com.epam.training.kk.dataaccess.dao.OrderDao;
+import com.epam.training.kk.dataaccess.dao.mapper.OrderMapper;
+import com.epam.training.kk.dataaccess.model.Car;
 import com.epam.training.kk.dataaccess.model.Order;
 import com.epam.training.kk.services.OrderService;
 
@@ -39,14 +44,17 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Long  addToHistoryAndUpdateClient(Order order) {
+	public Long addToHistoryAndUpdateClient(Order order) {
 		Long id = orderDao.addToHistory(order);
 		LOGGER.info("new order added to the history, id: {}", id);
 		int currentDiscont = order.getPrice() * 10 / 100;
-		int discont = clientDao.getById(order.getClientId()).getDiscont() + currentDiscont;
-		clientDao.update(clientDao.getById(order.getClientId()).getPhoneNumber(),order.getAddress(), 
-				discont, order.getClientId());
+		int discont = clientDao.getById(order.getClientId()).getDiscont()
+				+ currentDiscont;
+		clientDao.update(clientDao.getById(order.getClientId())
+				.getPhoneNumber(), order.getAddress(), discont, order
+				.getClientId());
 		return id;
+		
 	}
 
 	@Override
@@ -57,5 +65,25 @@ public class OrderServiceImpl implements OrderService {
 		LOGGER.info("order {} updated", id);
 	}
 
+	@Override
+	public List<Order> getAll(long first, long count) {
+		return orderDao.getAll(first, count);
+	}
+	
+	public Integer getCount() {
+		return orderDao.getCount();
+
+	}
+	@Override
+	public List<Order> getAllFromHistory(long first, long count){
+		return orderDao.getAll(first, count);
+	}
+	
+	@Override
+	public void delete(Long id) {
+		orderDao.delete(id);
+		LOGGER.info("order deleted. id: {}", id);
+		return;
+	}
 
 }

@@ -1,5 +1,7 @@
 package com.epam.training.kk.dataaccess.dao;
 
+import java.util.List;
+
 import com.epam.training.kk.dataaccess.model.Order;
 
 public interface OrderDao {
@@ -15,5 +17,11 @@ public interface OrderDao {
 	Long addToHistory(Order order);
 
 	Order getFromHistory(Long id);
+
+	List<Order> getAllFromHistory(long first, long count);
+
+	List<Order> getAll(long first, long count);
+
+	Integer getCount();
 
 }
