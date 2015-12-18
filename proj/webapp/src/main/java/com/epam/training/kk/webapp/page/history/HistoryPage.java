@@ -21,7 +21,7 @@ public class HistoryPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		List<Order> allOrders = orderService.getAllFromHistory();
+		List<Order> allOrders = orderService.getAllFromHistory(getAutoIndex(), getAutoIndex());
 
 		add(new ListView<Order>("orders-list", allOrders) {
 			@Override

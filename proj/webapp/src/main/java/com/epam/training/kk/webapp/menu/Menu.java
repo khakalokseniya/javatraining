@@ -23,7 +23,6 @@ public class Menu extends Panel {
 		
 		add(new BookmarkablePageLink<Void>("orders", OrdersPage.class));
 		add(new BookmarkablePageLink<Void>("clients", ClientsPage.class));
-		add(new BookmarkablePageLink<Void>("map", MapPage.class));
 		add(new BookmarkablePageLink<Void>("cars", CarsPage.class));
 		add(new BookmarkablePageLink<Void>("history", HistoryPage.class));
 	}

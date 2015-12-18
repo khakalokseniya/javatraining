@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-
 	<div id="site_content">
-		<div class="sidebar"></div>
-		<div id="content">
+		<h2>NEW ORDER</h2>
+		<div class="form-order">
 			<form wicket:id="form-order">
 				<table>
 					<tr>
@@ -14,30 +13,37 @@
 						<td><label>Address:</label></td>
 						<td><input wicket:id="address" type="text" /></td>
 					</tr>
+					<tr>
+						<td><label>Car
+								<table style="width: 200px";>
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Callsign</th>
+										</tr>
+									</thead>
 
+									<tbody>
+										<tr wicket:id="cars-list">
+											<td><span wicket:id="id"></span></td>
+											<td><span wicket:id="callsign"></span></td>
+											<td><button type="button" wicket:id="choose-link">Choose</button></td>
+										</tr>
+
+									</tbody>
+								</table>
+								<div wicket:id="paging"></div>
+						</label></td>
+					</tr>
 					<tr>
 						<td colspan="2"><button type="submit"
 								wicket:id="submit-button">Add order</button></td>
 					</tr>
-				</table>
 
+				</table>
 			</form>
-			<table>
-				<thead>
-					<tr>
-						<th wicket:id="sortId">ID</th>
-						<th wicket:id="sortCallsign">Callsign</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr wicket:id="cars-list">
-						<td><span wicket:id="id"></span></td>
-						<td><span wicket:id="callsign"></span></td>
-						<td><button type="button" wicket:id="choose-link">Choose</button></td>
-					</tr>
-				</tbody>
-			</table>
-			<div wicket:id="paging"></div>
+			<div wicket:id="feedback"></div> 
 		</div>
+		<div class="map"></div>
 	</div>
 </wicket:extend>
