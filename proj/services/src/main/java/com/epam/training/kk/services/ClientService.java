@@ -1,5 +1,7 @@
 package com.epam.training.kk.services;
 
+import java.util.List;
+
 import com.epam.training.kk.dataaccess.model.Client;
 
 public interface ClientService {
@@ -10,6 +12,10 @@ public interface ClientService {
 	void delete(Long id);
 
 	Long update(String phoneNumber, String address,	int discont, Long id);
+	
+    Long insertOrUpdate(Client client);
+   
+    List<Client> getAll();
 	
 	
 }

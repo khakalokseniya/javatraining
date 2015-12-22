@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-	<h1>Orders page</h1>
-	<form wicket:id="form">
-		<table>
-			<tr>
-				<td><label>Phone number:</label></td>
-				<td><input wicket:id="phone_number" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>Address:</label></td>
-				<td><input wicket:id="address" type="text" /></td>
-			</tr>
+	<div id="site_content">
+		<h2>NEW ORDER</h2>
+		<div class="form-order">
+			<form wicket:id="form-order">
+				<table>
+					<tr>
+						<td><label>Phone number:</label></td>
+						<td><input wicket:id="phone_number" type="text" /></td>
+					</tr>
+					<tr>
+						<td><label>Address:</label></td>
+						<td><input wicket:id="address" type="text" /></td>
+					</tr>
+					<tr>
+						<td><label>Car
+								<table style="width: 300px";>
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Callsign</th>
+										</tr>
+									</thead>
 
-			<tr>
-				<td colspan="2"><button type="submit" wicket:id="submit-button">Добавить клиента</button></td>
-			</tr>
-		</table>
-	</form>
+									<tbody>
+										<tr wicket:id="cars-list">
+											<td><span wicket:id="id"></span></td>
+											<td><span wicket:id="callsign"></span></td>
+											<td><button type="button" wicket:id="choose-link">Choose</button></td>
+										</tr>
+
+									</tbody>
+								</table>
+								<div wicket:id="paging"></div>
+						</label></td>
+					</tr>
+					<tr>
+						<td colspan="2"><button type="submit"
+								wicket:id="submit-button">Add order</button></td>
+					</tr>
+
+				</table>
+			</form>
+		</div>
+		<div class="map"></div>
+	</div>
 </wicket:extend>

@@ -1,5 +1,7 @@
 package com.epam.training.kk.services.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +50,23 @@ public class ClientServiceImpl implements ClientService {
 		clientDao.delete(id);
 		LOGGER.info("client deleted. id: {}", id);
 		return;
+	}
+
+	@Override
+	public Long insertOrUpdate(Client client) {
+		Long id;
+		List<Client> list = clientDao.getAll();
+		if(list.contains(client.getPhoneNumber())){
+			clientDao.update(client.getPhoneNumber(), client.getAddress(), clientDao.getById(client.getId()).getDiscont(), client.getId());
+			id = client.getId();
+		}else{
+			id =clientDao.insert(client);
+		}
+		return id;
+	}
+
+	@Override
+	public List<Client> getAll() {
+		return clientDao.getAll();
 	}
 }

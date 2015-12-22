@@ -1,5 +1,8 @@
 package com.epam.training.kk.dataaccess.dao;
 
+import java.util.List;
+
+import com.epam.training.kk.dataaccess.model.Car;
 import com.epam.training.kk.dataaccess.model.Client;
 
 public interface ClientDao {
@@ -11,5 +14,7 @@ public interface ClientDao {
 			int discont, Long id);
 
 	void delete(Long id);
+	
+	List<Client> getAll();
 
 }

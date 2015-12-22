@@ -3,7 +3,7 @@ package com.epam.training.kk.dataaccess.model;
 public class Client {
 	private Long id;
 	private String phoneNumber;
-	private String address;
+	private String address;//удалить
 	private int discont;
 	
 	public Client(String phoneNumber, String address){
