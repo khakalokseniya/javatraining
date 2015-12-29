@@ -10,11 +10,16 @@ public interface ClientDao {
 
 	Long insert(Client client);
 
-	void update(String phoneNumber, String address,
-			int discont, Long id);
-
 	void delete(Long id);
 	
 	List<Client> getAll();
+	
+	Long findByPhone(String phoneNumber);
+
+	void update(String phoneNumber, int discont, Long id);
+
+	List<Client> sort(long first, long count);
+
+	Integer getCount();
 
 }

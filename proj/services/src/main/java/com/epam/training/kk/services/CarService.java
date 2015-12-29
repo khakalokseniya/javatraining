@@ -15,8 +15,13 @@ public interface CarService {
 
 	void delete(Long id);
 
-	List<Car> getAll(long first, long count);//find
 
 	Integer getCount();
+
+	List<Car> getAll();
+	
+	List<Car> getActiveCars();
+	
+	public List<Car> sort(long first, long count);
 
 }

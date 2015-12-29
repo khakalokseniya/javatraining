@@ -1,48 +1,68 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 	<div id="site_content">
-		<h2>NEW ORDER</h2>
 		<div class="form-order">
-			<form wicket:id="form-order">
-				<table>
+			<form wicket:id="form-order" style="float: left">
+				<h2>create a new order</h2>
+				<table style="width: 300px">
 					<tr>
-						<td><label>Phone number:</label></td>
-						<td><input wicket:id="phone_number" type="text" /></td>
+						<td><label><h4>phone number:</h4></label></td>
+						<td colspan="3"><input size="30" wicket:id="clientPhone" type="text" /></td>
 					</tr>
 					<tr>
-						<td><label>Address:</label></td>
-						<td><input wicket:id="address" type="text" /></td>
+						<td rowspan="2"><label><h4>address:</h4></label></td>
+						<td colspan="3"><input size="30" wicket:id="address.street" type="text" /></td>
 					</tr>
 					<tr>
-						<td><label>Car
-								<table style="width: 300px";>
-									<thead>
-										<tr>
-											<th>ID</th>
-											<th>Callsign</th>
-										</tr>
-									</thead>
-
-									<tbody>
-										<tr wicket:id="cars-list">
-											<td><span wicket:id="id"></span></td>
-											<td><span wicket:id="callsign"></span></td>
-											<td><button type="button" wicket:id="choose-link">Choose</button></td>
-										</tr>
-
-									</tbody>
-								</table>
-								<div wicket:id="paging"></div>
-						</label></td>
+						<td><input size="5" wicket:id="address.house" type="text" /></td>
+						<td><input size="5" wicket:id="address.corps" type="text" /></td>
+						<td><input size="5" wicket:id="address.apartment" type="text" /></td>
 					</tr>
 					<tr>
-						<td colspan="2"><button type="submit"
-								wicket:id="submit-button">Add order</button></td>
+						<td><label style="width: 100%" colspan="2"><h4>car</h4></label></td>
+						<td colspan="3"><div wicket:id="car-choice" class="car-choice"></div></td>
+					</tr>
+					<tr>
+						<td><button type="submit"
+								wicket:id="submit-button">add order</button></td>
 					</tr>
 
 				</table>
 			</form>
+			<form wicket:id="form-currentOrders" style="float: right">
+				<h2>active orders</h2>
+				<table>
+					<thead>
+						<tr>
+							<th wicket:id="sortId">ID</th>
+							<th>client phone</th>
+							<th>callsign</th>
+							<th>address</th>
+							<th wicket:id="sortTime">time</th>
+							<th>distance</th>
+							<th>price</th>
+							<th>isCompleted</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr wicket:id="orders-list">
+							<td><span wicket:id="id"></span></td>
+							<td><span wicket:id="clientPhone"></span></td>
+							<td><span wicket:id="carCallsign"></span></td>
+							<td><span wicket:id="address"></span></td>
+							<td><span wicket:id="time"></span></td>
+							<td><span wicket:id="distance"></span></td>
+							<td><span wicket:id="price"></span></td>
+							<td><span wicket:id="isCompleted"></span></td>
+							<td><button type="button" wicket:id="update-link">UPDATE</button></td>
+						</tr>
+					</tbody>
+
+				</table>
+				<td><button type="button" wicket:id="ordersUpdate-button">UPDATE
+						ORDERS</button></td>
+			</form>
 		</div>
-		<div class="map"></div>
+		<div id="map"></div>
 	</div>
 </wicket:extend>

@@ -1,5 +1,29 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-		<h1>New Client</h1>
-			
+
+	<div id="site_content">
+		<h1>All clients</h1>
+		<form wicket:id="form-client">
+			<table>
+				<thead>
+					<tr>
+						<th wicket:id="sortId">id</th>
+						<th>phone number</th>
+						<th wicket:id="sortDiscont">discont</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr wicket:id="client-list">
+						<td><span wicket:id="id"></span></td>
+						<td><span wicket:id="phoneNumber"></span></td>
+						<td><span wicket:id="discont"></span></td>
+						<td><button type="button" wicket:id="useDiscont-link"> <span wicket:id="linklabel"></span></button></td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<div wicket:id="paging"></div>
+		</form>
+	</div>
+
 </wicket:extend>

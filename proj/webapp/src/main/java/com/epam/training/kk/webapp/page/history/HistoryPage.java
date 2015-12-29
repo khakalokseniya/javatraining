@@ -1,5 +1,6 @@
 package com.epam.training.kk.webapp.page.history;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,16 +22,16 @@ public class HistoryPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		List<Order> allOrders = orderService.getAllFromHistory(getAutoIndex(), getAutoIndex());
+		List<Order> allOrders = orderService.getAll();
 
 		add(new ListView<Order>("orders-list", allOrders) {
 			@Override
 			protected void populateItem(ListItem<Order> item) {
 				final Order order = item.getModelObject();
 				item.add(new Label("id", order.getId()));
-				item.add(new Label("client_id", order.getClientId()));
+				item.add(new Label("client_phone", order.getClientPhone()));
 				item.add(new Label("car_id", order.getCarId()));
-				item.add(new Label("address", order.getAddress()));
+				item.add(new Label("address", (Serializable) order.getAddress()));
 				item.add(new Label("time", order.getTime()));
 				item.add(new Label("distance", order.getDistance()));
 				item.add(new Label("price", order.getPrice()));

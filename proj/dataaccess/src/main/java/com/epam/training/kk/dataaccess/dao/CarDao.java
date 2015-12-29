@@ -19,9 +19,13 @@ public interface CarDao {
 			String color, int year, String callsign, Long driverId,
 			Boolean activity, Long id);
 
-	List<Car> getAll(long first, long count);
+	List<Car> getAll();
 
 	Integer getCount();
+
+	List<Car> getActiveCars();
+
+	List<Car> sort(long first, long count);
 	
 	
 }

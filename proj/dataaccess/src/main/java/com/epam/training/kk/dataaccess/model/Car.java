@@ -1,6 +1,8 @@
 package com.epam.training.kk.dataaccess.model;
 
-public class Car {
+import java.io.Serializable;
+
+public class Car implements Serializable{
 	private Long id;
 	private String registrationNumber;
 	private String brand;
@@ -12,6 +14,8 @@ public class Car {
 	private Long driverId;
 	boolean activity;
 	public enum Type {PASSENGER_CAR, MINIVAN, TRUCK};
+	
+	public Car(){}
 	
 	public Car(String registrationNumber, String brand, String model, Type type, String color,
 			int year, String callsign, Long driverId){

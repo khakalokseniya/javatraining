@@ -1,14 +1,16 @@
 package com.epam.training.kk.dataaccess.model;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable{
 	private Long id;
 	private String phoneNumber;
-	private String address;//удалить
 	private int discont;
 	
-	public Client(String phoneNumber, String address){
+	public Client(){}
+	
+	public Client(String phoneNumber){
 		this.phoneNumber = phoneNumber;
-		this.address = address;
 	}
 
 	/**
@@ -41,20 +43,6 @@ public class Client {
 	}
 
 	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	/**
 	 * @return the discont
 	 */
 	public int getDiscont() {
@@ -66,6 +54,37 @@ public class Client {
 	 */
 	public void setDiscont(int discont) {
 		this.discont = discont;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
+				return false;
+		} else if (!phoneNumber.equals(other.phoneNumber))
+			return false;
+		return true;
 	}
 	
 }

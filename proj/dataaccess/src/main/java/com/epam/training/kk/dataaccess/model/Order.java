@@ -1,21 +1,29 @@
 package com.epam.training.kk.dataaccess.model;
 
-public class Order {
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class Order implements Serializable{
 	private Long id;
-	private Long clientId;
+	private String clientPhone;
 	private Long carId;
-	private String address;
+	private Address address;
 	private String time;
 	private double distance;
 	private int price;
 	boolean isCompleted = true;
-
-	public Order(Long clientId, Long carId, String address, String time) {
-		this.clientId = clientId;
+	
+	public Order(){}
+	
+	public Order(String clientPhone, Long carId, Address address, String time) {
+		this.clientPhone = clientPhone;
 		this.carId = carId;
 		this.address = address;
 		this.time = time;
 	}
+	
+	
 
 	/**
 	 * @return the id
@@ -32,20 +40,6 @@ public class Order {
 		this.id = id;
 	}
 
-	/**
-	 * @return the clientId
-	 */
-	public Long getClientId() {
-		return clientId;
-	}
-
-	/**
-	 * @param clientId
-	 *            the clientId to set
-	 */
-	public void setClientId(Long clientId) {
-		this.clientId = clientId;
-	}
 
 	/**
 	 * @return the carId
@@ -65,7 +59,7 @@ public class Order {
 	/**
 	 * @return the address
 	 */
-	public String getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 
@@ -73,7 +67,7 @@ public class Order {
 	 * @param address
 	 *            the address to set
 	 */
-	public void setAddress(String address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 
@@ -136,5 +130,19 @@ public class Order {
 	public void setCompleted(boolean isCompleted) {
 		this.isCompleted = isCompleted;
 
+	}
+	
+	/**
+	 * @return the clientPhone
+	 */
+	public String getClientPhone() {
+		return clientPhone;
+	}
+
+	/**
+	 * @param clientPhone the clientPhone to set
+	 */
+	public void setClientPhone(String clientPhone) {
+		this.clientPhone = clientPhone;
 	}
 }

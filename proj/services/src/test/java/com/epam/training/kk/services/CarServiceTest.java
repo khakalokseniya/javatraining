@@ -28,7 +28,7 @@ public class CarServiceTest {
 
 	@Before
 	public void init() {
-		car = new Car("regNumber", "brand", "model", Type.MINIVAN, "black", 2011, "callsign", 112l);
+		car = new Car("regNumber", "brand", "model", Type.MINIVAN, "black", 2011, "callsign", 157l);
 		car.setActivity(true);
 	}
 
@@ -41,7 +41,7 @@ public class CarServiceTest {
 	@Test
 	public void updateCarTest() {
 		Long id = service.insert(car);
-		service.update("Izmenen", "brand", "model", Type.MINIVAN, "black", 2011, "callsign", 112l, true, id);
+		service.update("Izmenen", "brand", "model", Type.MINIVAN, "black", 2011, "callsign", 157l, true, id);
 		assertEquals("Izmenen", service.get(id).getRegistrationNumber());
 	}
 
@@ -62,7 +62,7 @@ public class CarServiceTest {
 	
 	@Test
 	public void getAllTest(){
-		List <Car> cars = service.getAll(1l, 1l);
+		List <Car> cars = service.getAll();
 		for(int i = 0; i < cars.size(); i++){
 			assertNotNull(cars.get(i));
 		}

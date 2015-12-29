@@ -11,11 +11,17 @@ public interface ClientService {
 
 	void delete(Long id);
 
-	Long update(String phoneNumber, String address,	int discont, Long id);
-	
     Long insertOrUpdate(Client client);
    
     List<Client> getAll();
+    
+    Long findByPhone(String phoneNumber);
+
+	Long update(String phoneNumber, int discont, Long id);
+
+	List<Client> sort(long first, long count);
+
+	Integer getCount();
 	
 	
 }

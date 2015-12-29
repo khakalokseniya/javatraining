@@ -2,7 +2,9 @@ package com.epam.training.kk.dataaccess.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,11 @@ import org.springframework.stereotype.Repository;
 
 import com.epam.training.kk.dataaccess.dao.OrderDao;
 import com.epam.training.kk.dataaccess.dao.mapper.CarMapper;
+import com.epam.training.kk.dataaccess.dao.mapper.ClientMapper;
 import com.epam.training.kk.dataaccess.dao.mapper.OrderMapper;
+import com.epam.training.kk.dataaccess.model.Address;
 import com.epam.training.kk.dataaccess.model.Car;
+import com.epam.training.kk.dataaccess.model.Client;
 import com.epam.training.kk.dataaccess.model.Order;
 
 @Repository
@@ -26,25 +31,11 @@ public class OrderDaoImpl implements OrderDao {
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public Order getById(Long id) {
-		Order order = new Order(0l, 0l, null, null);
+	public Order getById(Long id) {//add join address
+		Order order = new Order(null, 0l, null, null);
 		try {
-			return jdbcTemplate.queryForObject(
-					"select * from \"Order\" where id = ?",
-					new Object[] { id }, new OrderMapper());
-		} catch (DataAccessException e) {
-			order = null;
-		}
-		return order;
-	}
-
-	@Override
-	public Order getFromHistory(Long id) {
-		Order order = new Order(0l, 0l, null, null);
-		try {
-			return jdbcTemplate.queryForObject(
-					"select * from \"HistoryOfOrders\" where id = ?",
-					new Object[] { id }, new OrderMapper());
+			return jdbcTemplate.queryForObject("select * from \"Order\""
+					+"LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id)" , new Object[] { id }, new OrderMapper());
 		} catch (DataAccessException e) {
 			order = null;
 		}
@@ -53,61 +44,43 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Long insert(final Order order) {
-		KeyHolder keyHolder = new GeneratedKeyHolder();
+		final KeyHolder keyHolder1 = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			@Override
-			public PreparedStatement createPreparedStatement(
-					Connection connection) throws SQLException {
-				PreparedStatement ps = connection
-						.prepareStatement(
-								"INSERT INTO \"Order\" (client_id, car_id, address, time, distance, price, is_completed"
-										+ ") VALUES (?,?,?,?,?,?,?)",
-								new String[] { "id" });
-				ps.setLong(1, order.getClientId());
-				ps.setLong(2, order.getCarId());
-				ps.setString(3, order.getAddress());
-				ps.setString(4, order.getTime());
-				ps.setDouble(5, order.getDistance());
-				ps.setInt(6, order.getPrice());
-				ps.setBoolean(7, order.isCompleted());
-				return ps;
+			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+				PreparedStatement ps1 = connection.prepareStatement("INSERT INTO \"Address\" (street, house, corps, apartment) VALUES (?,?,?,?)",
+						new String[] { "id" });
+				ps1.setString(1, order.getAddress().getStreet());
+				ps1.setString(2, order.getAddress().getHouse());
+				ps1.setString(3, order.getAddress().getCorps());
+				ps1.setString(4, order.getAddress().getApartment());
+				return ps1;
 			}
-		}, keyHolder);
-		return keyHolder.getKey().longValue();
-	}
-
-	@Override
-	public Long addToHistory(final Order order) {
-		KeyHolder keyHolder = new GeneratedKeyHolder();
+		}, keyHolder1);
+		KeyHolder keyHolder2 = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			@Override
-			public PreparedStatement createPreparedStatement(
-					Connection connection) throws SQLException {
-				PreparedStatement ps = connection
-						.prepareStatement(
-								"INSERT INTO \"HistoryOfOrders\" (client_id, car_id, address, time, distance, price, is_completed"
-										+ ") VALUES (?,?,?,?,?,?,?)",
-								new String[] { "id" });
-				ps.setLong(1, order.getClientId());
-				ps.setLong(2, order.getCarId());
-				ps.setString(3, order.getAddress());
-				ps.setString(4, order.getTime());
-				ps.setDouble(5, order.getDistance());
-				ps.setInt(6, order.getPrice());
-				ps.setBoolean(7, order.isCompleted());
-				return ps;
+			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+				PreparedStatement ps2 = connection.prepareStatement("INSERT INTO \"Order\" (client_phone, car_id, address, time) VALUES (?,?,?,?)",
+						new String[] { "id" });
+				ps2.setString(1, order.getClientPhone());
+				ps2.setLong(2, order.getCarId());
+				ps2.setObject(3, keyHolder1.getKey().longValue());
+				ps2.setString(4, order.getTime());
+				return ps2;
 			}
-		}, keyHolder);
-		return keyHolder.getKey().longValue();
+		}, keyHolder2);
+		return keyHolder2.getKey().longValue();
+		// TODO transaction address
 	}
+	
+	
+
 
 	@Override
-	public void update(Long id, Long clientId, Long carId, String address,
-			String time, double distance, int price, boolean isCompleted) {
-		String sqlUpdate = "UPDATE \"Order\" set client_id=?, car_id=?, address=?, time=?,"
-				+ "distance=?, price=?, is_completed=? where id=?";
-		jdbcTemplate.update(sqlUpdate, clientId, carId, address, time,
-				distance, price, isCompleted, id);
+	public void update(Long id, String clientPhone, Long carId, Address address, String time, double distance, int price, boolean isCompleted) {
+		String sqlUpdate = "UPDATE \"Order\" set client_phone=?, car_id=?, address=?, time=?," + "distance=?, price=?, is_completed=? where id=?";
+		jdbcTemplate.update(sqlUpdate, clientPhone, carId, address, time, distance, price, isCompleted, id);
 		return;
 	}
 
@@ -115,26 +88,35 @@ public class OrderDaoImpl implements OrderDao {
 	public void delete(Long id) {
 		jdbcTemplate.update("delete from \"Order\" where id = ?", id);
 	}
-	
+
 	@Override
-	public List<Order> getAll(long first, long count) {
-		return jdbcTemplate.query(String.format(
-				"select * from \"Order\" order by  id limit %s offset %s ", count,
-				first), new OrderMapper());
+	public List<Order> getAll() {
+		return jdbcTemplate.query(String.format("select * from \"Order\" "+
+	" LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id) order by  \"Order\".id"), new OrderMapper());
 	}
 	
-	@Override
-	public List<Order> getAllFromHistory(long first, long count) {
-		return jdbcTemplate.query(String.format(
-				"select * from \"HistoryOfOrders\" order by  id limit %s offset %s ", count,
-				first), new OrderMapper());
+	@Override 
+	public List<Order> sort(long first, long count){
+		return jdbcTemplate.query(String.format("select * from \"Order\""+
+				 "LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id)  order by  \"Order\".id  limit %s offset %s", count, first), new OrderMapper());
 	}
-	
-	
+
+
 	@Override
 	public Integer getCount() {
-		return jdbcTemplate.queryForObject("select count(1) from \"Order\" ",
-				Integer.class);
+		return jdbcTemplate.queryForObject("select count(1) from \"Order\" ", Integer.class);
+	}
+
+	@Override
+	public void updateDriverInfo(double distance, int price, boolean isCompleted, Long id) {
+		String sqlUpdate = "UPDATE \"Order\" set distance=?, price=?, is_completed=? where id=?";
+		jdbcTemplate.update(sqlUpdate, distance, price, isCompleted, id);
+		return;
+	}
+
+	@Override
+	public void findAndDeleteCar(Long id) {
+			jdbcTemplate.update("delete from \"Order\" where car_id = ?", id);
 	}
 
 }

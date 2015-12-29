@@ -38,9 +38,8 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public Long update(String phoneNumber, String address,
-			int discont, Long id) {
-		clientDao.update(phoneNumber, address, discont, id);
+	public Long update(String phoneNumber, int discont, Long id) {
+		clientDao.update(phoneNumber, discont, id);
 		LOGGER.info("client {} updated", id);
 		return id;
 	}
@@ -56,9 +55,9 @@ public class ClientServiceImpl implements ClientService {
 	public Long insertOrUpdate(Client client) {
 		Long id;
 		List<Client> list = clientDao.getAll();
-		if(list.contains(client.getPhoneNumber())){
-			clientDao.update(client.getPhoneNumber(), client.getAddress(), clientDao.getById(client.getId()).getDiscont(), client.getId());
-			id = client.getId();
+		if(list.contains(client)){
+			id = clientDao.findByPhone(client.getPhoneNumber());
+			clientDao.update(client.getPhoneNumber(), client.getDiscont(), id);
 		}else{
 			id =clientDao.insert(client);
 		}
@@ -68,5 +67,20 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public List<Client> getAll() {
 		return clientDao.getAll();
+	}
+
+	@Override
+	public Long findByPhone(String phoneNumber) {
+		return clientDao.findByPhone(phoneNumber);
+	}
+	
+	@Override
+	public List<Client> sort(long first, long count){
+		return clientDao.sort(first, count);
+	}
+	
+	public Integer getCount() {
+		return clientDao.getCount();
+
 	}
 }

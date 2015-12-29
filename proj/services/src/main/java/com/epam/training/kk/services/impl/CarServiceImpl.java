@@ -51,13 +51,23 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public List<Car> getAll(long first, long count) {
-		return carDao.getAll(first, count);
+	public List<Car> getAll() {
+		return carDao.getAll();
 	}
 	
 	public Integer getCount() {
 		return carDao.getCount();
 
+	}
+
+	@Override
+	public List<Car> getActiveCars() {
+		return carDao.getActiveCars();
+	}
+	
+	@Override
+	public List<Car> sort(long first, long count){
+		return carDao.sort(first, count);
 	}
 	
 	

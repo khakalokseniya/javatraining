@@ -15,7 +15,9 @@ import org.springframework.stereotype.Repository;
 
 import com.epam.training.kk.dataaccess.dao.CarDao;
 import com.epam.training.kk.dataaccess.dao.mapper.CarMapper;
+import com.epam.training.kk.dataaccess.dao.mapper.OrderMapper;
 import com.epam.training.kk.dataaccess.model.Car;
+import com.epam.training.kk.dataaccess.model.Order;
 import com.epam.training.kk.dataaccess.model.Car.Type;
 
 @Repository
@@ -81,15 +83,26 @@ public class CarDaoImpl implements CarDao {
 	}
 	
 	@Override
-	public List<Car> getAll(long first, long count) {
+	public List<Car> getAll() {
 		return jdbcTemplate.query(String.format(
-				"select * from \"Car\" order by  id limit %s offset %s ", count,
-				first), new CarMapper());
+				"select * from \"Car\" order by  id"), new CarMapper());
+	}
+	
+	@Override
+	public List<Car> getActiveCars() {
+		return jdbcTemplate.query(String.format(
+				"select * from \"Car\" where activity='true' order by  id "), new CarMapper());
 	}
 	
 	@Override
 	public Integer getCount() {
 		return jdbcTemplate.queryForObject("select count(1) from \"Car\" ",
 				Integer.class);
+	}
+	
+	@Override 
+	public List<Car> sort(long first, long count){
+		return jdbcTemplate.query(String.format("select * from \"Car\" "+
+				 "LEFT JOIN \"Driver\" ON (\"Car\".driver_id=\"Driver\".id) order by  \"Car\".id  limit %s offset %s", count, first), new CarMapper());
 	}
 }

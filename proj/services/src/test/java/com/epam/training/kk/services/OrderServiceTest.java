@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.epam.training.kk.dataaccess.model.Address;
 import com.epam.training.kk.dataaccess.model.Driver;
 import com.epam.training.kk.dataaccess.model.Order;
 
@@ -30,7 +31,8 @@ public class OrderServiceTest {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		String time = sdf.format(cal.getTime());
-		order = new Order(1l, 104l, "Grodno", time);
+		Address address = new Address("Boldina", "5", "2", "11");
+		order = new Order("12321", 132l, address, time);
 		order.setCompleted(true);
 		order.setDistance(10);
 		order.setPrice(15000);
@@ -43,18 +45,13 @@ public class OrderServiceTest {
 		assertNotNull(o);
 	}
 
-	@Test
-	public void creationHistoryRowTest() {
-		Long id = service.addToHistoryAndUpdateClient(order);
-		Order o = service.getFromHistory(id);
-		assertNotNull(o);
-	}
 
 	@Test
 	public void updateOrderTest() {
 		Long id = service.insert(order);
-		service.update(id, 1l, 104l, "Minsk", null, 0, 0, false);
-		assertEquals("Minsk", service.get(id).getAddress());
+		Address address = new Address("Minsk", "5", "2", "11");
+		service.update(id, "12322", 132l, address, null, 0, 0, false);
+		assertEquals("Minsk", service.get(id).getAddress().getStreet());
 	}
 
 	@Test
@@ -63,27 +60,15 @@ public class OrderServiceTest {
 		assertNotNull(service.get(id));
 	}
 
-	@Test
-	public void getHistoryOrderTest() {
-		Long id = service.addToHistoryAndUpdateClient(order);
-		assertNotNull(service.getFromHistory(id).toString());
-	}
 	
 	@Test
 	public void getAllTest(){
-		List <Order> orders= service.getAll(1l, 1l);
+		List <Order> orders= service.getAll();
 		for(int i = 0; i < orders.size(); i++){
 			assertNotNull(orders.get(i));
 		}
 	}
 	
-	@Test
-	public void getAllFromHistoryTest(){
-		List <Order> orders= service.getAllFromHistory(1l, 1l);
-		for(int i = 0; i < orders.size(); i++){
-			assertNotNull(orders.get(i));
-		}
-	}
 	
 	@Test
 	public void deletingOrderTest() {

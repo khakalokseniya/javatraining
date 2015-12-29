@@ -1,5 +1,50 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-		<h1>Car Page</h1>
-			
+	<div id="site_content">
+		<h1>All cars</h1>
+		<button type="button" wicket:id="newCar-link">NEW CAR</button>
+		<form wicket:id="form-cars">
+			<table>
+				<thead>
+					<tr>
+						<th wicket:id="sortId">ID</th>
+						<th>registration number</th>
+						<th>brand</th>
+						<th>model</th>
+						<th>type</th>
+						<th>color</th>
+						<th>year</th>
+						<th>callsign</th>
+						<th wicket:id="sortDriverId">driverId</th>
+						<th>full name</th>
+						<th>phoneNumber</th>
+						<th>address</th>
+						<th>startingDate</th>
+						<th>certificate</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr wicket:id="cars-list">
+						<td><span wicket:id="id"></span></td>
+						<td><span wicket:id="registrationNumber"></span></td>
+						<td><span wicket:id="brand"></span></td>
+						<td><span wicket:id="model"></span></td>
+						<td><span wicket:id="type"></span></td>
+						<td><span wicket:id="color"></span></td>
+						<td><span wicket:id="year"></span></td>
+						<td><span wicket:id="callsign"></span></td>
+						<td><span wicket:id="driverId"></span></td>
+						<td><span wicket:id="fullName"></span></td>
+						<td><span wicket:id="phoneNumber"></span></td>
+						<td><span wicket:id="address"></span></td>
+						<td><span wicket:id="startingDate"></span></td>
+						<td><span wicket:id="certificate"></span></td>
+						<td><button type="button" wicket:id="edit-link">EDIT</button></td>
+						<td><button type="button" wicket:id="delete-link"><span wicket:id="linklabel"></span></button></td>
+					</tr>
+				</tbody>
+			</table>
+			<div wicket:id="paging"></div>
+		</form>
+	</div>
 </wicket:extend>

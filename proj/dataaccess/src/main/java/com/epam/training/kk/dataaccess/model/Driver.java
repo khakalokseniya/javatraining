@@ -1,9 +1,10 @@
 package com.epam.training.kk.dataaccess.model;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
-public class Driver {
+public class Driver implements Serializable{
 	private Long id;
 	private String fullName;
 	private String phoneNumber;
@@ -11,6 +12,7 @@ public class Driver {
 	private Date startingDate;
 	private String certificate;
 
+	public Driver(){}
 	public Driver(String fullName, String phoneNumber, String address) {
 		this.fullName = fullName;
 		this.phoneNumber = phoneNumber;

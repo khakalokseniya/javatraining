@@ -2,6 +2,7 @@ package com.epam.training.kk.dataaccess.dao;
 
 import java.util.List;
 
+import com.epam.training.kk.dataaccess.model.Address;
 import com.epam.training.kk.dataaccess.model.Order;
 
 public interface OrderDao {
@@ -11,17 +12,15 @@ public interface OrderDao {
 
 	void delete(Long id);
 
-	void update(Long id, Long clientId, Long carId, String address, String time,
-			double distance, int price, boolean isCompleted);
-
-	Long addToHistory(Order order);
-
-	Order getFromHistory(Long id);
-
-	List<Order> getAllFromHistory(long first, long count);
-
-	List<Order> getAll(long first, long count);
-
 	Integer getCount();
 
+	void update(Long id, String clientPhone, Long carId, Address address, String time, double distance, int price, boolean isCompleted);
+
+	void updateDriverInfo(double distance, int price, boolean isCompleted, Long id);
+
+	List<Order> getAll();
+
+	List<Order> sort(long first, long count);
+
+	void findAndDeleteCar(Long id);
 }

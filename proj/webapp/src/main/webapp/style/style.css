@@ -42,7 +42,7 @@ h4, h5, h6 {
 	margin: 0;
 	padding: 0 0 5px 0;
 	font: normal 120% arial, sans-serif;
-	color: #A4AA04;
+	color: #3B3B3B;
 }
 
 h5, h6 {
@@ -170,7 +170,7 @@ ol li {
 }
 
 #menubar
-{ width: 378px;
+{ width: 479px;
   height: 71px;
   
   padding: 0px 0 0 0px;
@@ -207,7 +207,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 { color: #FFF;}
 
 #site_content {
-	width: 1200px;
+	width: 1100px;
 	overflow: hidden;
 	margin: 0 auto 0 auto;
 	padding: 25px 20px 20px 33px;
@@ -306,7 +306,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 .form_settings input, .form_settings textarea {
 	padding: 5px;
 	width: 299px;
-	font: 100% arial;
+	font: 100% bimini;
 	border: 1px solid #E5E5DB;
 	background: #FFF;
 	color: #47433F;
@@ -367,12 +367,26 @@ table tr td {
 }
 
 .form-order {
-	padding: 10px 5px 10px 5px;
+	padding: 0 5px 10px 5px;
 }
 
-.map {
-	width: 700px;
-	height: 700px;
+#map {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0px);
+    background-color: rgb(229, 227, 223);
+    height: 430px;
+    position: relative;
+    width: 100%;
 }
+
+.car-choice label{
+	width:100%;
+	float:left;
+	marging:1px;
 }
+
+.car-choice{
+	height:150px;
 }
+
