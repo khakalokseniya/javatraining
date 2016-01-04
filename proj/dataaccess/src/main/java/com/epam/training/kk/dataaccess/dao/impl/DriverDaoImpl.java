@@ -51,7 +51,7 @@ public class DriverDaoImpl implements DriverDao {
 				ps.setString(1, driver.getFullName());
 				ps.setString(2, driver.getPhoneNumber());
 				ps.setString(3, driver.getAddress());
-				ps.setDate(4, new Date(driver.getStartingDate().getTime()));
+				ps.setDate(4,  new Date(driver.getStartingDate().getTime()));
 				ps.setString(5, driver.getCertificate());
 				return ps;
 			}

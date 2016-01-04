@@ -1,6 +1,76 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-	<div id="site_content">
-
-	</div>
+	<h1>Create car</h1>
+	<form wicket:id="create-driver">
+		<table>
+			<tr>
+				<td><label>full name:</label></td>
+				<td><input wicket:id="fullName" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>phone number:</label></td>
+				<td><input wicket:id="phoneNumber" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>address:</label></td>
+				<td><input wicket:id="address" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>starting date:</label></td>
+				<td><input wicket:id="startingDate" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>certificate:</label></td>
+				<td><input wicket:id="certificate" type="text" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><button type="submit" wicket:id="drsubmit-button">create driver</button></td>
+			</tr>
+		</table>
+	</form>
+	<div wicket:id="feedback"></div>
+	<form wicket:id="create-car">
+		<table>
+			<tr>
+				<td><label>registrationNumber:</label></td>
+				<td><input wicket:id="registrationNumber" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>brand:</label></td>
+				<td><input wicket:id="brand" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>model:</label></td>
+				<td><input wicket:id="model" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>type:</label></td>
+				<td><select wicket:id="type">
+						<option value="PASSENGER_CAR">passenger car</option>
+						<option value="1">minivan</option>
+						<option value="2">truck</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label>color:</label></td>
+				<td><input wicket:id="color" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>year:</label></td>
+				<td><input wicket:id="year" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>callsign:</label></td>
+				<td><input wicket:id="callsign" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>activity</label></td>
+				<td><input wicket:id="activity" type="checkbox" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><button type="submit" wicket:id="submit-button">save</button></td>
+			</tr>
+		</table>
+	</form>
+	
 </wicket:extend>

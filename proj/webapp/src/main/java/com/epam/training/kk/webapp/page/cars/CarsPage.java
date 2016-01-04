@@ -55,7 +55,7 @@ public class CarsPage extends AbstractPage {
 
 			@Override
 			public void onClick() {
-				setResponsePage((IRequestablePage) new NewCarPage());
+				setResponsePage(new NewCarPage());
 			}
 		});
 		final Form<Object> carsForm = new Form<>("form-cars");

@@ -11,7 +11,6 @@ import com.epam.training.kk.webapp.login.LoginPage;
 import com.epam.training.kk.webapp.page.cars.CarsPage;
 import com.epam.training.kk.webapp.page.clients.ClientsPage;
 import com.epam.training.kk.webapp.page.history.HistoryPage;
-import com.epam.training.kk.webapp.page.map.MapPage;
 import com.epam.training.kk.webapp.page.orders.OrdersPage;
 
 public class Menu extends Panel {

@@ -53,7 +53,7 @@ public class CarDaoImpl implements CarDao {
 				ps.setString(1,  car.getRegistrationNumber());
 				ps.setString(2, car.getBrand());
 				ps.setString(3, car.getModel());
-				ps.setString(4, car.getType().name());
+				ps.setString(4, car.getType().toString());
 				ps.setString(5, car.getColor());
 				ps.setInt(6, car.getYear());
 				ps.setString(7, car.getCallsign());
