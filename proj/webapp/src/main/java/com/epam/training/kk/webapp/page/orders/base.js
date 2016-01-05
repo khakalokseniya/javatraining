@@ -8,6 +8,12 @@ function initMap() {
 		      mapTypeId: google.maps.MapTypeId.ROADMAP
 		    }
 		    var map = new google.maps.Map(mapCanvas, mapOptions);
+		    
+		    var marker = new google.maps.Marker({
+		        position: latlng, 
+		        map: map, 
+		        title:"Grodno"
+		    }); 
 		  }
 	 google.maps.event.addDomListener(window, 'load', initialize);
 }

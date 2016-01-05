@@ -7,24 +7,29 @@
 				<table style="width: 300px">
 					<tr>
 						<td><label><h4>phone number:</h4></label></td>
-						<td colspan="3"><input size="30" wicket:id="clientPhone" type="text" /></td>
+						<td colspan="4"><input size="30" wicket:id="clientPhone"
+							type="text" /></td>
 					</tr>
 					<tr>
 						<td rowspan="2"><label><h4>address:</h4></label></td>
-						<td colspan="3"><input size="30" wicket:id="address.street" type="text" /></td>
+						<td colspan="3"><input size="20" wicket:id="address.street"
+							type="text" /></td>
+							<td rowspan="2"> <input id="submit" type="button" value="Geocode"></td>
 					</tr>
 					<tr>
-						<td><input size="5" wicket:id="address.house" type="text" /></td>
-						<td><input size="5" wicket:id="address.corps" type="text" /></td>
-						<td><input size="5" wicket:id="address.apartment" type="text" /></td>
+						<td><input size="3" wicket:id="address.house" type="text" /></td>
+						<td><input size="3" wicket:id="address.corps" type="text" /></td>
+						<td><input size="3" wicket:id="address.apartment" type="text" /></td>
+						
 					</tr>
 					<tr>
 						<td><label style="width: 100%" colspan="2"><h4>car</h4></label></td>
-						<td colspan="3"><div wicket:id="car-choice" class="car-choice"></div></td>
+						<td colspan="4"><div wicket:id="car-choice"
+								class="car-choice"></div></td>
 					</tr>
 					<tr>
-						<td><button type="submit"
-								wicket:id="submit-button">add order</button></td>
+						<td><button type="submit" wicket:id="submit-button">add
+								order</button></td>
 					</tr>
 
 				</table>
@@ -64,5 +69,57 @@
 			</form>
 		</div>
 		<div id="map"></div>
+		<script>
+		var tableid = 297050;
+		var circle;
+		var meters = 1000;
+		var marker; 
+			function initMap() {
+				var mapCanvas = document.getElementById('map');
+				var mapOptions = {
+					center : new google.maps.LatLng(53.6666667, 23.8333333),
+					zoom : 14,
+					mapTypeId : google.maps.MapTypeId.ROADMAP
+				}
+				var map = new google.maps.Map(mapCanvas, mapOptions);
+				var geocoder = new google.maps.Geocoder();
+
+				document.getElementById('submit').addEventListener('click',
+						function() {
+							geocodeAddress(geocoder, map);
+							
+						});
+				
+					  circle = new google.maps.Circle({
+					    radius: meters,
+					    map: map,
+					    fillOpacity: 0.2,
+					    strokeOpacity: 0.5,
+					    strokeWeight: 1
+					  });
+					  marker = new google.maps.Marker(
+								{
+									map : map,
+								});
+			}
+			function geocodeAddress(geocoder, resultsMap) {
+
+				var address = 'Grodno'+document.forms[0].elements[2].value+document.forms[0].elements[3].value;
+				geocoder.geocode({'address' : address},	function(results, status) {
+									if (status === google.maps.GeocoderStatus.OK) {
+										resultsMap.setCenter(results[0].geometry.location);
+										marker.setPosition(results[0].geometry.location);
+										circle.setCenter(results[0].geometry.location);
+									} else {
+										alert('Geocode was not successful for the following reason: '
+												+ status);
+									}
+								});
+				 
+			}
+			
+			google.maps.event.addDomListener(window, 'load', initialize);
+		</script>
+
 	</div>
 </wicket:extend>

@@ -69,14 +69,16 @@ public class OrdersPage extends AbstractPage {
 		final Form<Order> orderForm = new Form<>("form-order", new CompoundPropertyModel<>(order));
 		add(orderForm);
 
-		final TextField<String> phoneField = new TextField<String>("clientPhone");
+		final TextField<Integer> phoneField = new TextField<Integer>("clientPhone");
 		phoneField.setRequired(true);
 		phoneField.add(StringValidator.maximumLength(255));
 		orderForm.add(phoneField);
 
 		final TextField<String> streetField = new TextField<String>("address.street");
+		streetField.setRequired(true);
 		orderForm.add(streetField);
 		final TextField<String> houseField = new TextField<String>("address.house");
+		houseField.setRequired(true);
 		orderForm.add(houseField);
 		final TextField<String> corpsField = new TextField<String>("address.corps");
 		orderForm.add(corpsField);
