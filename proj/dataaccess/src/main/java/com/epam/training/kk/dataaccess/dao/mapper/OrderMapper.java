@@ -2,6 +2,7 @@ package com.epam.training.kk.dataaccess.dao.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -20,10 +21,11 @@ public final class OrderMapper implements RowMapper<Order> {
 		String apartment = rs.getString("apartment");
 		Address address = new Address(street, house, corps, apartment);
 		String time = rs.getString("time");
-		double distance = rs.getFloat("distance");
-		int price = rs.getInt("price");
+		double distance = rs.getDouble("distance");
+		double price = rs.getDouble("price");
 		boolean isCompleted = rs.getBoolean("is_completed");
-		Order order = new Order(clientPhone, carId, address, time);
+		String date = rs.getString("date");
+		Order order = new Order(clientPhone, carId, address, time, date);
 		order.setId(id);
 		order.setDistance(distance);
 		order.setPrice(price);

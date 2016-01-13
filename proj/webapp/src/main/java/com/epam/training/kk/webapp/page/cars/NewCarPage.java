@@ -11,6 +11,8 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.datetime.StyleDateConverter;
 import org.apache.wicket.datetime.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
+import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
+import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.EnumChoiceRenderer;
@@ -29,17 +31,17 @@ import com.epam.training.kk.services.CarService;
 import com.epam.training.kk.services.DriverService;
 import com.epam.training.kk.webapp.page.abstractPage.AbstractPage;
 
-public class NewCarPage extends AbstractPage{
-	
+public class NewCarPage extends AbstractPage {
+
 	@Inject
 	private CarService carService;
 	@Inject
 	private DriverService driverService;
-	
+
 	private Driver driver;
 	Long driverId;
 	private Car car;
-	
+
 	public NewCarPage() {
 		this(new Car(), new Driver());
 	}
@@ -50,24 +52,31 @@ public class NewCarPage extends AbstractPage{
 		this.driver = driver;
 	}
 
-	
 	Model<Type> typeModel;
-	
+
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		final FeedbackPanel fp = new FeedbackPanel("feedback");
-		add(fp);
+		
 
 		final Form<Driver> drform = new Form<>("create-driver", new CompoundPropertyModel<>(driver));
 		add(drform);
 		drform.setOutputMarkupId(true);
-		drform.add(new TextField<String>("fullName"));
-		drform.add(new TextField<String>("phoneNumber"));
-		drform.add(new TextField<String>("address"));
 		
-		DateTextField dateTextField = new DateTextField("startingDate",
-				new StyleDateConverter("S-", true));
+		final FeedbackPanel driverfp = new FeedbackPanel("driver-feedback");
+		driverfp.setFilter(new ContainerFeedbackMessageFilter(drform));
+		TextField<String> fname = new TextField<String>("fullName");
+		fname.setRequired(true);
+		drform.add(fname);
+		TextField<String> phone = new TextField<String>("phoneNumber");
+		phone.setRequired(true);
+		drform.add(phone);
+		TextField<String> address = new TextField<String>("address");
+		address.setRequired(true);
+		drform.add(address);
+		
+		DateTextField dateTextField = new DateTextField("startingDate", new StyleDateConverter("S-", true));
+		dateTextField.setRequired(true);
 		drform.add(dateTextField);
 		DatePicker datePicker = new DatePicker() {
 			@Override
@@ -80,61 +89,67 @@ public class NewCarPage extends AbstractPage{
 		dateTextField.add(datePicker);
 		dateTextField.setRequired(true);
 		
-		drform.add(new TextField<String>("certificate"));
-		
+		TextField<String> certificate = new TextField<String>("certificate");
+		certificate.setRequired(true);
+		drform.add(certificate);
 		drform.add(new SubmitLink("drsubmit-button") {
 			@Override
 			public void onSubmit() {
 				driverId = driverService.insert(driver);
-				fp.info("new driver created");
+				driverfp.info("new driver created");
 			}
 		});
-//		drform.add(new AjaxLink("drsubmit-button") {
-//			@Override
-//			public void onClick(AjaxRequestTarget target) {
-//				driverId = driverService.insert(driver);
-//				fp.info("new driver created");
-//				target.add(drform);
-//			}
-//		});
 		
+		drform.add(driverfp);
+
 		final Form<Car> form = new Form<>("create-car", new CompoundPropertyModel<>(car));
 		add(form);
-
-		form.add(new TextField<String>("registrationNumber"));
-		form.add(new TextField<String>("brand"));
-		form.add(new TextField<String>("model"));
+		final FeedbackPanel carfp = new FeedbackPanel("car-feedback");
+		carfp.setFilter(new ContainerFeedbackMessageFilter(form));
+		TextField<String> registrationNumber = new TextField<String>("registrationNumber");
+		registrationNumber.setRequired(true);
+		form.add(registrationNumber);
+		TextField<String> brand = new TextField<String>("brand");
+		brand.setRequired(true);
+		form.add(brand);
+		TextField<String> model = new TextField<String>("model");
+		model.setRequired(true);
+		form.add(model);
 		
 		typeModel = new Model<Type>();
 		List<Type> types = Arrays.asList(Type.values());
-		DropDownChoice<Type> dropDownChoice = new DropDownChoice<Type>("type",
-				typeModel,types);
+		DropDownChoice<Type> dropDownChoice = new DropDownChoice<Type>("type", typeModel, types);
 		dropDownChoice.setRequired(true);
 		form.add(dropDownChoice);
-		
-		form.add(new TextField<String>("color"));
-		form.add(new TextField<Integer>("year"));
-		form.add(new TextField<String>("callsign"));
+		TextField<String> color = new TextField<String>("color");
+		color.setRequired(true);
+		form.add(color);
+		TextField<Integer> year = new TextField<Integer>("year");
+		year.setRequired(true);
+		form.add(year);
+		TextField<String> callsign = new TextField<String>("callsign");
+		callsign.setRequired(true);
+		form.add(callsign);
 		final Model<Boolean> activity = new Model<Boolean>(Boolean.TRUE);
 		form.add(new CheckBox("activity"));
 
 		form.add(new SubmitLink("submit-button") {
 			@Override
 			public void onSubmit() {
-				Type type = typeModel.getObject();
-				car.setType(type);
-				car.setDriverId(driverId);
-				carService.insert(car);
-				CarsPage pageToResponse = new CarsPage();
-				pageToResponse.info("car created!!!!");
-				setResponsePage(pageToResponse);
+				if (driverId == null) {
+					carfp.info("save the driver");
+				} else {
+					Type type = typeModel.getObject();
+					car.setType(type);
+					car.setDriverId(driverId);
+					car.setDistance(0);
+					carService.insert(car);
+					CarsPage pageToResponse = new CarsPage();
+					pageToResponse.info("car created!!!!");
+					setResponsePage(pageToResponse);
+				}
 			}
 		});
-		
-		
-		
-		
+		form.add(carfp);
 	}
 }
-
-

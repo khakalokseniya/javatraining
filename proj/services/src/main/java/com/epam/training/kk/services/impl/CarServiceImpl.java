@@ -66,9 +66,16 @@ public class CarServiceImpl implements CarService {
 	}
 	
 	@Override
-	public List<Car> sort(long first, long count){
-		return carDao.sort(first, count);
+	public List<Car> sort(long first, long count, boolean direction, String column){
+		return carDao.sort(first, count, direction, column);
 	}
+
+	@Override
+	public Long updateDistance(double distance, Long id) {
+		return carDao.updateDistance(distance, id);
+	}
+	
+	
 	
 	
 }

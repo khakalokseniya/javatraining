@@ -6,10 +6,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
@@ -48,6 +51,15 @@ public class CarsPage extends AbstractPage {
 	
 	
 	public CarsPage(){}
+	
+//	 @Override
+//	   protected void onConfigure() {
+//	      super.onConfigure();
+//	      AuthenticatedWebApplication app = (AuthenticatedWebApplication)Application.get();
+//	      if(!AuthenticatedWebSession.get().isSignedIn())
+//	         app.restartResponseAtSignInPage();
+//	   }
+	 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -75,8 +87,8 @@ public class CarsPage extends AbstractPage {
 				item.add(new Label("color", car.getColor()));
 				item.add(new Label("year", car.getYear()));
 				item.add(new Label("callsign", car.getCallsign()));
-				item.add(new Label("driverId", car.getDriverId()));
-				item.add(new Label("fullName", driverService.get(car.getDriverId()).getFullName()));
+				item.add(new Label("distance", car.getDistance()));
+				item.add(new Label("driver-name", driverService.get(car.getDriverId()).getFullName()));
 				item.add(new Label("phoneNumber", driverService.get(car.getDriverId()).getPhoneNumber()));
 				item.add(new Label("address", driverService.get(car.getDriverId()).getAddress()));
 				item.add(new Label("startingDate", driverService.get(car.getDriverId()).getStartingDate()));
@@ -97,7 +109,6 @@ public class CarsPage extends AbstractPage {
 							target.add(carsForm);
 				        }
 				     };
-				     alink.add(new Label("linklabel", "DELETE"));
 				     item.add(alink);
 
 			}
@@ -105,7 +116,8 @@ public class CarsPage extends AbstractPage {
 		carsForm.add(dataView);
 
 		carsForm.add(new OrderByBorder<Object>("sortId", "id", carsDataProvider));
-		carsForm.add(new OrderByBorder<Object>("sortDriverId", "driverId", carsDataProvider));
+		carsForm.add(new OrderByBorder<Object>("sortDistance", "distance", carsDataProvider));
+		carsForm.add(new OrderByBorder<Object>("sortStartingDate", "startingDate", carsDataProvider));
 		carsForm.add(new PagingNavigator("paging", dataView));
 	}
 
@@ -113,7 +125,7 @@ public class CarsPage extends AbstractPage {
 
 		public CarsDataProvider() {
 			super();
-			setSort("id", SortOrder.ASCENDING);
+			setSort("starting_date", SortOrder.ASCENDING);
 		}
 
 		@Override
@@ -124,7 +136,7 @@ public class CarsPage extends AbstractPage {
 			SortOrder currentSort = sortState.getPropertySortOrder(sort.getProperty());
 
 			System.out.println(sort.getProperty() + ":" + currentSort.name());
-			return carService.sort(first, count).iterator();
+			return carService.sort(first, count, sort.isAscending(), (String) sort.getProperty()).iterator();
 		}
 
 		@Override

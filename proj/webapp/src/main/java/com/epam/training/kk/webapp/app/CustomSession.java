@@ -18,6 +18,7 @@ public class CustomSession extends AuthenticatedWebSession {
 	private UserService userService;
 
 	private Roles roles;
+	private String login;
 
 	public CustomSession(Request request) {
 		super(request);
@@ -34,7 +35,15 @@ public class CustomSession extends AuthenticatedWebSession {
 			throw new IllegalArgumentException("user service is null");
 		}
 		try {
-			return userService.authenticate(login, password);
+			boolean authResult = false;
+
+			authResult = userService.authenticate(login, password);
+
+			if (authResult) {
+				this.login = login;
+			}
+			return authResult;
+
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			return false;
 		}
@@ -43,15 +52,22 @@ public class CustomSession extends AuthenticatedWebSession {
 	@Override
 	public void signOut() {
 		super.signOut();
-		roles = null;
+		login = null;
+		roles=null;
 	}
+	
+	
 
 	@Override
 	public Roles getRoles() {
 		if (roles == null) {
 			roles = new Roles();
-			// TODO add actual list of roles for current logged user
-			roles.add("admin");// 'client', 'simple user' etc...
+			if (isSignedIn()) {
+				roles.add(Roles.USER);
+				if (login.equals("admin")) {
+					roles.add(Roles.ADMIN);
+				}
+			}
 		}
 		return roles;
 	}

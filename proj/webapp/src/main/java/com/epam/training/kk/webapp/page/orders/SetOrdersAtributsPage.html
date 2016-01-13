@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+	<div id="site_content">
+		<h1>Update order</h1>
+	<form wicket:id="form-ordersAtributs">
+		<table>
+			<tr>
+				<td><label>distance:</label></td>
+				<td><input wicket:id="distance" type="text" /></td>
+			</tr>
+			<tr>
+				<td><label>is completed</label></td>
+				<td><input wicket:id="isCompleted" type="checkbox" /></td>
+			</tr>
+			<tr>
+				<td><label>use clients discont</label></td>
+				<td><input wicket:id="useDiscont" type="checkbox" /></td>
+			</tr>
+			<tr>
+				<td colspan="2"><button type="submit" wicket:id="submit-button">save</button></td>
+			</tr>
+		</table>
+	</form>
+	<div wicket:id="feedback"></div> 
+
+	</div>
+</wicket:extend>

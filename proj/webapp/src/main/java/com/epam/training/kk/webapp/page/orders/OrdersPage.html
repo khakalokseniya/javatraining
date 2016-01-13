@@ -2,78 +2,96 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 	<div id="site_content">
 		<div class="form-order">
-			<form wicket:id="form-order" style="float: left">
-				<h2>create a new order</h2>
-				<table style="width: 300px">
-					<tr>
-						<td><label><h4>phone number:</h4></label></td>
-						<td colspan="4"><input size="30" wicket:id="clientPhone"
-							type="text" /></td>
-					</tr>
-					<tr>
-						<td rowspan="2"><label><h4>address:</h4></label></td>
-						<td colspan="3"><input size="20" wicket:id="address.street"
-							type="text" /></td>
-							<td rowspan="2"> <input id="submit" type="button" value="Geocode"></td>
-					</tr>
-					<tr>
-						<td><input size="3" wicket:id="address.house" type="text" /></td>
-						<td><input size="3" wicket:id="address.corps" type="text" /></td>
-						<td><input size="3" wicket:id="address.apartment" type="text" /></td>
-						
-					</tr>
-					<tr>
-						<td><label style="width: 100%" colspan="2"><h4>car</h4></label></td>
-						<td colspan="4"><div wicket:id="car-choice"
-								class="car-choice"></div></td>
-					</tr>
-					<tr>
-						<td><button type="submit" wicket:id="submit-button">add
-								order</button></td>
-					</tr>
-
-				</table>
-			</form>
-			<form wicket:id="form-currentOrders" style="float: right">
-				<h2>active orders</h2>
+			<div wicket:id="dataContainer" style="float: right; width: 60%">
+				<h2>
+					<wicket:message key="text.active-orders">active orders</wicket:message>
+				</h2>
 				<table>
 					<thead>
 						<tr>
-							<th wicket:id="sortId">ID</th>
-							<th>client phone</th>
-							<th>callsign</th>
-							<th>address</th>
-							<th wicket:id="sortTime">time</th>
-							<th>distance</th>
-							<th>price</th>
-							<th>isCompleted</th>
+							<th>ID</th>
+							<th><wicket:message key="client-phone">client phone</wicket:message></th>
+							<th><wicket:message key="callsign">callsign</wicket:message></th>
+							<th><wicket:message key="address">address</wicket:message></th>
+							<th wicket:id="sortTime"><wicket:message key="time">time</wicket:message></th>
+							<th><wicket:message key="distance">distance</wicket:message></th>
+							<th><wicket:message key="price">price</wicket:message></th>
+							<th><wicket:message key="isCompleted">isCompleted</wicket:message></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr wicket:id="orders-list">
 							<td><span wicket:id="id"></span></td>
-							<td><span wicket:id="clientPhone"></span></td>
+							<td><span wicket:id="client-phone"></span></td>
 							<td><span wicket:id="carCallsign"></span></td>
 							<td><span wicket:id="address"></span></td>
 							<td><span wicket:id="time"></span></td>
 							<td><span wicket:id="distance"></span></td>
 							<td><span wicket:id="price"></span></td>
 							<td><span wicket:id="isCompleted"></span></td>
-							<td><button type="button" wicket:id="update-link">UPDATE</button></td>
+							<td><button type="button" wicket:id="update-link">
+									<wicket:message key="UPDATE">UPDATE</wicket:message>
+								</button></td>
 						</tr>
 					</tbody>
+				</table>
+				<div wicket:id="paging"></div>
+			</div>
+			<form wicket:id="form-order"
+				style="float: left; width: 40%; margin: 0 0 10px 0;">
+				<h2>
+					<wicket:message key="create-a-new-order">create a new order</wicket:message>
+				</h2>
+				<table style="width: 300px">
+					<tr>
+						<td><label><h4>
+									<wicket:message key="phone number">phone number</wicket:message>
+								</h4></label></td>
+						<td colspan="4"><div class="clientPhone">
+								<input size="20" wicket:id="clientPhone" class="rfield"
+									type="text" pattern="[0-9]{2}[0-9]{3}[0-9]{2}[0-9]{2}">
+							</div></td>
+					</tr>
+					<tr>
+						<td rowspan="2"><label><h4>
+									<wicket:message key="address">address</wicket:message>
+								</h4></label></td>
+						<td colspan="3"><input size="20" wicket:id="address.street"
+							type="text" /></td>
+						<td rowspan="2"><input id="mapsubmit" type="button" value=" "
+							class="button" /></td>
+					</tr>
+					<tr>
+						<td><input size="3" wicket:id="address.house" type="text" /></td>
+						<td><input size="3" wicket:id="address.corps" type="text" /></td>
+						<td><input size="3" wicket:id="address.apartment" type="text" /></td>
+
+					</tr>
+					<tr>
+						<td><label style="width: 100%" colspan="2"><h4>
+									<wicket:message key="car">car</wicket:message>
+								</h4></label></td>
+						<td colspan="4"><div wicket:id="car-choice"
+								class="car-choice"></div></td>
+					</tr>
+					<tr>
+						<td colspan="5"><button type="button"
+								wicket:id="submit-button" class="btn_submit">
+								<wicket:message key="ADD">ADD</wicket:message>
+							</button></td>
+					</tr>
 
 				</table>
-				<td><button type="button" wicket:id="ordersUpdate-button">UPDATE
-						ORDERS</button></td>
+				<div style="color: #B80000" wicket:id="feedback"></div>
 			</form>
+
 		</div>
 		<div id="map"></div>
 		<script>
-		var tableid = 297050;
-		var circle;
-		var meters = 1000;
-		var marker; 
+			var tableid = 297050;
+			var circle;
+			var meters = 1000;
+			var marker;
 			function initMap() {
 				var mapCanvas = document.getElementById('map');
 				var mapOptions = {
@@ -82,42 +100,104 @@
 					mapTypeId : google.maps.MapTypeId.ROADMAP
 				}
 				var map = new google.maps.Map(mapCanvas, mapOptions);
+				setMarkers(map);
+
 				var geocoder = new google.maps.Geocoder();
 
-				document.getElementById('submit').addEventListener('click',
+				document.getElementById('mapsubmit').addEventListener('click',
 						function() {
 							geocodeAddress(geocoder, map);
-							
+
 						});
-				
-					  circle = new google.maps.Circle({
-					    radius: meters,
-					    map: map,
-					    fillOpacity: 0.2,
-					    strokeOpacity: 0.5,
-					    strokeWeight: 1
-					  });
-					  marker = new google.maps.Marker(
-								{
-									map : map,
-								});
+
+				circle = new google.maps.Circle({
+					radius : meters,
+					map : map,
+					fillOpacity : 0.2,
+					strokeOpacity : 0.5,
+					strokeWeight : 1
+				});
+				marker = new google.maps.Marker({
+					map : map,
+				});
 			}
 			function geocodeAddress(geocoder, resultsMap) {
 
-				var address = 'Grodno'+document.forms[0].elements[2].value+document.forms[0].elements[3].value;
-				geocoder.geocode({'address' : address},	function(results, status) {
+				var address = 'Grodno' + document.forms[0].elements[2].value
+						+ document.forms[0].elements[4].value;
+				geocoder
+						.geocode(
+								{
+									'address' : address
+								},
+								function(results, status) {
 									if (status === google.maps.GeocoderStatus.OK) {
-										resultsMap.setCenter(results[0].geometry.location);
-										marker.setPosition(results[0].geometry.location);
-										circle.setCenter(results[0].geometry.location);
+										resultsMap
+												.setCenter(results[0].geometry.location);
+										marker
+												.setPosition(results[0].geometry.location);
+										circle
+												.setCenter(results[0].geometry.location);
 									} else {
 										alert('Geocode was not successful for the following reason: '
 												+ status);
 									}
 								});
-				 
+
 			}
-			
+			var cars = [
+					[ 'Ленин', 53.65957356, 23.83574118, 10 ],
+					[ 'Петруха', 53.64787375, 23.83419822, 9 ],
+					[ 'Початок', 53.67584616, 23.82887672, 8 ],
+					[ 'Пушок', 53.66354059, 23.80003761, 7 ],
+					[ 'Серый', 53.68855476, 53.68855476, 6 ],
+					['Никита', 53.70705162, 23.84003671, 5],
+					['Барин', 53.68743655,	23.85548623, 4],
+					['Кудряш', 53.67096504, 23.85892146, 3],
+					['Таксист', 53.6290455, 23.85720685, 2],
+					['Форд', 53.65357145, 23.79335082, 1] 
+					];
+
+			function setMarkers(map) {
+				// Adds markers to the map.
+
+				// Marker sizes are expressed as a Size of X,Y where the origin of the image
+				// (0,0) is located in the top left of the image.
+
+				// Origins, anchor positions and coordinates of the marker increase in the X
+				// direction to the right and in the Y direction down.
+				var image = {
+					url : 'style/taxi.png',
+					// This marker is 20 pixels wide by 32 pixels high.
+					size : new google.maps.Size(40, 40),
+					// The origin for this image is (0, 0).
+					origin : new google.maps.Point(0, 0),
+					// The anchor for this image is the base of the flagpole at (0, 32).
+					anchor : new google.maps.Point(0, 32)
+				};
+				// Shapes define the clickable region of the icon. The type defines an HTML
+				// <area> element 'poly' which traces out a polygon as a series of X,Y points.
+				// The final coordinate closes the poly by connecting to the first coordinate.
+				var shape = {
+					coords : [ 1, 1, 1, 20, 18, 20, 18, 1 ],
+					type : 'poly'
+				};
+				for (var i = 0; i < cars.length; i++) {
+					var car = cars[i];
+					var marker = new google.maps.Marker({
+						position : {
+							lat : car[1],
+							lng : car[2]
+						},
+						map : map,
+						icon : image,
+						shape : shape,
+						title : car[0],
+						zIndex : car[3]
+					});
+				}
+			}
+
 			google.maps.event.addDomListener(window, 'load', initialize);
 		</script>
 

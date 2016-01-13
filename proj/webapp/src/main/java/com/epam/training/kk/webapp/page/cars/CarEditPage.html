@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-	<h1>Update car</h1>
-	<form wicket:id="form-car">
-		<table>
-			<tr>
-				<td><label>registrationNumber:</label></td>
-				<td><input wicket:id="registrationNumber" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>brand:</label></td>
-				<td><input wicket:id="brand" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>model:</label></td>
-				<td><input wicket:id="model" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>type:</label></td>
-				<td><input wicket:id="type" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>color:</label></td>
-				<td><input wicket:id="color" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>year:</label></td>
-				<td><input wicket:id="year" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>callsign:</label></td>
-				<td><input wicket:id="callsign" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>driverId:</label></td>
-				<td><input wicket:id="driverId" type="text" /></td>
-			</tr>
-			<tr>
-				<td><label>activity</label></td>
-				<td><input wicket:id="activity" type="checkbox" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><button type="submit" wicket:id="submit-button">save</button></td>
-			</tr>
-		</table>
-	</form>
-	<div wicket:id="feedback"></div> 
+	<div id="site_content">
+		<h1>
+			<wicket:message key="Update car">Update car</wicket:message>
+		</h1>
+		<form wicket:id="form-car">
+			<table>
+				<tr>
+					<td><label><wicket:message key="registrationNumber">registrationNumber</wicket:message></label></td>
+					<td><input wicket:id="registrationNumber" type="text" /></td>
+				</tr>
+				<tr>
+					<td><label><wicket:message key="brand">brand</wicket:message></label></td>
+					<td><input wicket:id="brand" type="text" /></td>
+				</tr>
+				<tr>
+					<td><label><wicket:message key="model">model</wicket:message></label></td>
+					<td><input wicket:id="model" type="text" /></td>
+				</tr>
+				<tr>
+					<td><label><wicket:message key="type">type</wicket:message></label></td>
+					<td><select wicket:id="type"></select></td>
+				</tr> 
+				<tr>
+					<td><label><wicket:message key="color">color</wicket:message></label></td>
+					<td><input wicket:id="color" type="text" /></td>
+				</tr>
+				<tr>
+					<td><label><wicket:message key="year">year</wicket:message></label></td>
+					<td><input wicket:id="year" type="text" /></td>
+				</tr>
+				<tr>
+					<td><label><wicket:message key="callsign">callsign</wicket:message></label></td>
+					<td><input wicket:id="callsign" type="text" /></td>
+				</tr>
+				<tr>
+					<td><label><wicket:message key="driverId">driverId</wicket:message></label></td>
+					<td><input wicket:id="driverId" type="text" /></td>
+				</tr>
+				<tr>
+					<td><label><wicket:message key="activity">activity</wicket:message></label></td>
+					<td><input wicket:id="activity" type="checkbox" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="submit"
+							wicket:id="submit-button">
+							<wicket:message key="save">save</wicket:message>
+						</button></td>
+				</tr>
+			</table>
+		</form>
+		<div wicket:id="feedback"></div>
+	</div>
 </wicket:extend>

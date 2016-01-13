@@ -11,9 +11,13 @@ public final class ClientMapper implements RowMapper<Client> {
 		Long id = rs.getLong("id");
 		String phoneNumber = rs.getString("phone_number");
 		int discont = rs.getInt("discont");
+		double distance = rs.getDouble("distance");
+		int numberOfOrders = rs.getInt("number_of_orders");
 		Client client = new Client(phoneNumber);
 		client.setId(id);
 		client.setDiscont(discont);
+		client.setDistance(distance);
+		client.setNumberOfOrders(numberOfOrders);
 		return client;
 	}
 }

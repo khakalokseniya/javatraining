@@ -25,7 +25,9 @@ public interface CarDao {
 
 	List<Car> getActiveCars();
 
-	List<Car> sort(long first, long count);
+	List<Car> sort(long first, long count, boolean direction, String column);
+	
+	Long updateDistance(double distance, Long id);
 	
 	
 }

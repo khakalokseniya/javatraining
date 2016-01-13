@@ -1,0 +1,28 @@
+<html
+    xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.3-strict.dtd">
+<wicket:panel>
+<div id="message" wicket:id="feedback">[Feedback Panel]</div>
+<form wicket:id="form">
+    <input type="text" wicket:id="seachfield" value="" />
+    <input type="submit" value="Search" />
+</form>
+ 
+<div wicket:id="resulttable">
+<table>
+    <thead>
+        <th>Action</th>
+        <th>phone number</th>
+        <th>discont</th>
+    </thead>
+    <tbody>
+       <tr wicket:id="resultlist">
+         <td><a wicket:id="select" href="#">Select</a></td>
+         <td><span wicket:id="phone number">phone number</span></td>
+         <td><span wicket:id="discont">discont</span></td>
+       </tr>
+    </tbody>
+</table>
+</div>
+ 
+</wicket:panel>
+</html>

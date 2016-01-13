@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
-	<h1>Login page</h1>
+	<div id="site_content">
+		<h1>
+			<wicket:message key="login-page">login page</wicket:message>
+		</h1>
 
-	<form wicket:id="login-form">
-		<table>
-			<tr>
-				<td>login:</td>
-				<td><input type="text" wicket:id="login" /></td>
-			</tr>
-			<tr>
-				<td>password:</td>
-				<td><input type="password" wicket:id="pass" /></td>
-			</tr>
-		</table>
-		<button type="submit" wicket:id="submit">LOGIN</button>
-	</form>
-	<div wicket:id="fbp"></div>
+		<form wicket:id="login-form">
+			<table>
+				<tr>
+					<td><wicket:message key="login">login:</wicket:message></td>
+					<td><input type="text" wicket:id="login" /></td>
+				</tr>
+				<tr>
+					<td><wicket:message key="password">password:</wicket:message></td>
+					<td><input type="password" wicket:id="pass" /></td>
+				</tr>
+			</table>
+			<button type="submit" wicket:id="submit">
+				<wicket:message key="button-login">LOGIN</wicket:message>
+			</button>
+		</form>
+		<div wicket:id="fbp"></div>
+	</div>
 </wicket:extend>
 

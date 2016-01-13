@@ -22,6 +22,8 @@ public interface CarService {
 	
 	List<Car> getActiveCars();
 	
-	public List<Car> sort(long first, long count);
+	public List<Car> sort(long first, long count, boolean direction, String column);
+	
+	Long updateDistance(double distance, Long id);
 
 }

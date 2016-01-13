@@ -31,7 +31,11 @@ public class Address implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return (street + " " + house + "-" + corps + "-" + apartment);
+		if(corps==null && apartment==null){
+			return (street + " " + house);
+		}else if(corps==null){
+			return (street + " " + house + "-" + apartment);
+		}else return (street + " " + house + "-" + corps + "-" + apartment);
 	}
 
 	/**

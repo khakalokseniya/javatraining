@@ -14,8 +14,7 @@ import com.epam.training.kk.services.ClientService;
 @Service
 public class ClientServiceImpl implements ClientService {
 
-	private static final Logger LOGGER = LoggerFactory
-			.getLogger(ClientServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ClientServiceImpl.class);
 
 	@Autowired
 	private ClientDao clientDao;
@@ -31,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
 		if (client.getId() == null) {
 			id = clientDao.insert(client);
 			LOGGER.info("new client created. id: {}", id);
-		}else{
+		} else {
 			System.out.println("Клиент уже существует");
 		}
 		return id;
@@ -55,11 +54,11 @@ public class ClientServiceImpl implements ClientService {
 	public Long insertOrUpdate(Client client) {
 		Long id;
 		List<Client> list = clientDao.getAll();
-		if(list.contains(client)){
+		if (list.contains(client)) {
 			id = clientDao.findByPhone(client.getPhoneNumber());
 			clientDao.update(client.getPhoneNumber(), client.getDiscont(), id);
-		}else{
-			id =clientDao.insert(client);
+		} else {
+			id = clientDao.insert(client);
 		}
 		return id;
 	}
@@ -73,14 +72,26 @@ public class ClientServiceImpl implements ClientService {
 	public Long findByPhone(String phoneNumber) {
 		return clientDao.findByPhone(phoneNumber);
 	}
-	
+
 	@Override
-	public List<Client> sort(long first, long count){
-		return clientDao.sort(first, count);
+	public List<Client> sort(long first, long count, boolean direction, String column) {
+		return clientDao.sort(first, count, direction, column);
 	}
-	
+
 	public Integer getCount() {
 		return clientDao.getCount();
 
 	}
+
+	@Override
+	public Long updateDiscont(int discont, double distance, int numberOfOrders, Long id) {
+		return clientDao.updateDiscontDistanceNumber(discont, distance, numberOfOrders, id);
+	}
+
+	@Override
+	public List<Client> search(String phoneNumber) {
+		return clientDao.search(phoneNumber);
+	}
+
+
 }

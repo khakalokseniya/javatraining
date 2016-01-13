@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 	<div id="site_content">
-		<h1>Users list view</h1>
-		<table>
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>client id</th>
-					<th>car id</th>
-					<th>address</th>
-					<th>time</th>
-					<th>distance</th>
-					<th>price</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr wicket:id="orders-list">
-					<td><span wicket:id="id"></span></td>
-					<td><span wicket:id="client_phone"></span></td>
-					<td><span wicket:id="car_id"></span></td>
-					<td><span wicket:id="address"></span></td>
-					<td><span wicket:id="time"></span></td>
-					<td><span wicket:id="distance"></span></td>
-					<td><span wicket:id="price"></span></td>
-					<td><button type="button" wicket:id="edit-link">Edit</button></td>
-				</tr>
-			</tbody>
-		</table>
-		<button type="button" wicket:id="back-link">back</button>
+		<div wicket:id="dataContainer" style="width:100%" >
+				<h2><wicket:message key="All completed orders">Orders history</wicket:message></h2>
+				<table>
+					<thead>
+						<tr>
+							<th wicket:id="sortId">ID</th>
+							<th><wicket:message key="client-phone">client phone</wicket:message></th>
+							<th><wicket:message key="callsign">callsign</wicket:message></th>
+							<th><wicket:message key="address">address</wicket:message></th>
+							<th wicket:id="sortDate"><wicket:message key="date">date</wicket:message></th>
+							<th wicket:id="sortTime"><wicket:message key="time">time</wicket:message></th>
+							<th><wicket:message key="distance">distance</wicket:message></th>
+							<th><wicket:message key="price">price</wicket:message></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr wicket:id="orders-list">
+							<td><span wicket:id="id"></span></td>
+							<td><span wicket:id="clientPhone"></span></td>
+							<td><span wicket:id="carCallsign"></span></td>
+							<td><span wicket:id="address"></span></td>
+							<td><span wicket:id="date"></span></td>
+							<td><span wicket:id="time"></span></td>
+							<td><span wicket:id="distance"></span></td>
+							<td><span wicket:id="price"></span></td>
+							<td><button type="button" wicket:id="delete-link"><wicket:message key="DELETE">DELETE</wicket:message></button></td>
+						</tr>
+					</tbody>
+				</table>
+				<div wicket:id="paging"></div>
+				</div>
 	</div>
 </wicket:extend>

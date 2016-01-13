@@ -57,7 +57,10 @@ h6 {
 a, a:hover {
 	outline: none;
 	text-decoration: underline;
-	color: #14CECC;
+	text-decoration: none;
+	color: #CDC090;
+	font: normal 100% 'trebuchet ms', arial;
+	
 }
 
 a:hover {
@@ -91,13 +94,13 @@ ol li {
 
 .left {
 	float: left;
-	width: auto;
+	width: 50%;
 	margin-right: 10px;
 }
 
 .right {
 	float: right;
-	width: auto;
+	width: 50%;
 	margin-left: 10px;
 }
 
@@ -119,14 +122,13 @@ ol li {
 }
 
 #logo {
-	width: 300px;
+	width: 25%;
 	float: left;
 	height: 72px;
 	background: url(logo.png) no-repeat;
 }
 
 #logo #logo_text {
-	
 	top: 1px;
 	left: 0;
 }
@@ -169,45 +171,53 @@ ol li {
 	color: #999;
 }
 
-#menubar
-{ width: 479px;
-  height: 71px;
-  
-  padding: 0px 0 0 0px;
-  border: 1px solid #6A6A6A;
-  border-bottom: 0;
-  background: #555 url(menu.png) repeat-x;} 
+#menubar {
+	width: 50%;
+	height: 71px;
+	padding: 0px 0 0 0px;
+	border: 1px solid #6A6A6A;
+	border-bottom: 0;
+	background: #555 url(menu.png) repeat-x;
+}
 
-ul#menu
-{ float: left;
-  margin: 0; 
-  padding: 0;}
+ul#menu {
+	float: left;
+	margin: 0 0 0 0;
+	padding: 0;
+	border: 1px solid #6A6A6A;
+	border-bottom: 0;
+	background: #555 url(menu.png) repeat-x;
+	height: 71px;
+}
 
-ul#menu li
-{ float: left;
-  margin: 0px 0 0 0;
-  padding: 0px 0 0 0px;
-  list-style: none;}
+ul#menu li {
+	float: left;
+	margin: 0px 0 0 0;
+	padding: 0px 0 0 0px;
+	list-style: none;
+}
 
-ul#menu li a
-{ letter-spacing: 0.1em;
-  font: normal 100% 'trebuchet ms', arial;
-  display: block; 
-  float: left; 
-  height: 38px;
-  padding: 28px 22px 4px 22px;
-  text-align: center;
-  color: #CDC090;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-right: 1px solid #6A6A6A;
-  background: transparent;} 
+ul#menu li a {
+	letter-spacing: 0.1em;
+	font: normal 100% 'trebuchet ms', arial;
+	display: inline-table;
+	float: left;
+	height: 38px;
+	padding: 28px 30px 4px 25px;
+	text-align: center;
+	color: #CDC090;
+	text-transform: uppercase;
+	text-decoration: none;
+	border-right: 1px solid #6A6A6A;
+	background: transparent;
+}
 
-ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
-{ color: #FFF;}
+ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover {
+	color: #FFF;
+}
 
 #site_content {
-	width: 1100px;
+	width: 1200px;
 	overflow: hidden;
 	margin: 0 auto 0 auto;
 	padding: 25px 20px 20px 33px;
@@ -371,36 +381,44 @@ table tr td {
 }
 
 #map {
-    position: relative;
-    overflow: hidden;
-    transform: translateZ(0px);
-    background-color: rgb(229, 227, 223);
-    height: 430px;
-    position: relative;
-    width: 100%;
+	position: relative;
+	overflow: hidden;
+	transform: translateZ(0px);
+	background-color: rgb(229, 227, 223);
+	height: 430px;
+	position: relative;
+	width: 100%;
 }
 
-.car-choice label{
-	width:100%;
-	float:left;
-	marging:1px;
+.car-choice label {
+	width: 100%;
+	float: left;
+	marging: 1px;
 }
 
-.car-choice{
-	height:150px;
+.car-choice {
+	height: 150px;
 }
 
-#floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
+.en .ru .lang-select{
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #CDC090;
+	font: normal 100% 'trebuchet ms', arial;
+	
 }
 
+input.button {
+	background-image: url('/style/location5.png');
+	background-repeat: no-repeat;
+	height: 58px;
+	padding-left: 34px;
+	border: none;
+	background-position: 2px 3px;
+	background-color: transparent;
+}
+
+.clientPhone:before{
+	content: "+375";
+	font-size: 16px;
+}

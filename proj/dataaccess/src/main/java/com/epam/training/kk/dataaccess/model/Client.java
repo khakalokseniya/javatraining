@@ -6,6 +6,9 @@ public class Client implements Serializable{
 	private Long id;
 	private String phoneNumber;
 	private int discont;
+	private double distance=0;
+	private int numberOfOrders=0;
+	
 	
 	public Client(){}
 	
@@ -85,6 +88,30 @@ public class Client implements Serializable{
 		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
 		return true;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public int getNumberOfOrders() {
+		return numberOfOrders;
+	}
+
+	public void setNumberOfOrders(int numberOfOrders) {
+		this.numberOfOrders = numberOfOrders;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Client [phoneNumber=" + phoneNumber + ", discont=" + discont + ", distance=" + distance + ", numberOfOrders=" + numberOfOrders + "]";
 	}
 	
 }

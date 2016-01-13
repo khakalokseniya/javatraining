@@ -24,33 +24,28 @@ import com.epam.training.kk.dataaccess.model.Car.Type;
 public class CarDaoImpl implements CarDao {
 
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate; //
 
 	@Override
 	public Car getById(Long id) {
 		Car car = new Car(null, null, null, null, null, 0, null, id);
-		try{
-		return jdbcTemplate.queryForObject(
-				"select * from \"Car\" where id = ?", new Object[] { id },
-				new CarMapper());
-		}catch(DataAccessException e){
+		try {
+			return jdbcTemplate.queryForObject("select * from \"Car\" where id = ?", new Object[] { id }, new CarMapper());
+		} catch (DataAccessException e) {
 			car = null;
 		}
 		return car;
 	}
 
 	@Override
-	public Long insert(final Car car) {
+	public Long insert(final Car car) throws NullPointerException {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			@Override
-			public PreparedStatement createPreparedStatement(
-					Connection connection) throws SQLException {
-				PreparedStatement ps = connection.prepareStatement(
-								"INSERT INTO \"Car\" (registration_number, brand, model, type,"
-										+ "color, year, callsign, driver_id, activity) VALUES (?,?,?,?,?,?,?,?,?)",
-								new String[] { "id" });
-				ps.setString(1,  car.getRegistrationNumber());
+			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement("INSERT INTO \"Car\" (registration_number, brand, model, type,"
+						+ "color, year, callsign, driver_id, activity, distance) VALUES (?,?,?,?,?,?,?,?,?,?)", new String[] { "id" });
+				ps.setString(1, car.getRegistrationNumber());
 				ps.setString(2, car.getBrand());
 				ps.setString(3, car.getModel());
 				ps.setString(4, car.getType().toString());
@@ -58,7 +53,9 @@ public class CarDaoImpl implements CarDao {
 				ps.setInt(6, car.getYear());
 				ps.setString(7, car.getCallsign());
 				ps.setLong(8, car.getDriverId());
+				ps.setLong(8, car.getDriverId());
 				ps.setBoolean(9, car.getActivity());
+				ps.setDouble(10, car.getDistance());
 				return ps;
 			}
 		}, keyHolder);
@@ -66,43 +63,45 @@ public class CarDaoImpl implements CarDao {
 	}
 
 	@Override
-		public void update(String registrationNumber, String brand, String model,  Type type, String color,
-				int year, String callsign, Long driverId, Boolean activity, Long id) {
+	public void update(String registrationNumber, String brand, String model, Type type, String color, int year, String callsign, Long driverId, Boolean activity, Long id) {
 		String stype = type.name();
-			String sqlUpdate = "UPDATE \"Car\" set registration_number=?, brand=?, model=?, type=?, color=?,"
-									+ "year=?, callsign=?, driver_id=?, activity=? where id=?";
-	        jdbcTemplate.update(sqlUpdate, registrationNumber, brand, model, stype, color, 
-	        		year,callsign, driverId, activity, id);
-	        return;
-		
+		String sqlUpdate = "UPDATE \"Car\" set registration_number=?, brand=?, model=?, type=?, color=?," + "year=?, callsign=?, driver_id=?, activity=? where id=?";
+		jdbcTemplate.update(sqlUpdate, registrationNumber, brand, model, stype, color, year, callsign, driverId, activity, id);
+		return;
+
 	}
 
 	@Override
 	public void delete(Long id) {
 		jdbcTemplate.update("delete from \"Car\" where id = ?", id);
 	}
-	
+
 	@Override
 	public List<Car> getAll() {
-		return jdbcTemplate.query(String.format(
-				"select * from \"Car\" order by  id"), new CarMapper());
+		return jdbcTemplate.query(String.format("select * from \"Car\" order by  id"), new CarMapper());
 	}
-	
+
 	@Override
 	public List<Car> getActiveCars() {
-		return jdbcTemplate.query(String.format(
-				"select * from \"Car\" where activity='true' order by  id "), new CarMapper());
+		return jdbcTemplate.query(String.format("select * from \"Car\" where activity='true' order by  id "), new CarMapper());
 	}
-	
+
 	@Override
 	public Integer getCount() {
-		return jdbcTemplate.queryForObject("select count(1) from \"Car\" ",
-				Integer.class);
+		return jdbcTemplate.queryForObject("select count(1) from \"Car\" ", Integer.class);
 	}
-	
-	@Override 
-	public List<Car> sort(long first, long count){
-		return jdbcTemplate.query(String.format("select * from \"Car\" "+
-				 "LEFT JOIN \"Driver\" ON (\"Car\".driver_id=\"Driver\".id) order by  \"Car\".id  limit %s offset %s", count, first), new CarMapper());
+
+	@Override
+	public List<Car> sort(long first, long count, boolean direction, String column) {
+		String cd = direction ? "ASC" : "DESC";
+		return jdbcTemplate.query(String.format("select * from \"Car\" " + "LEFT JOIN \"Driver\" ON (\"Car\".driver_id=\"Driver\".id) order by  %s %s  limit %s offset %s", column, cd, count, first),
+				new CarMapper());
+	}
+
+	@Override
+	public Long updateDistance(double distance, Long id) {
+		String sqlUpdate = "UPDATE \"Car\" set distance=? where id=?";
+		jdbcTemplate.update(sqlUpdate, distance, id);
+		return id;
 	}
 }

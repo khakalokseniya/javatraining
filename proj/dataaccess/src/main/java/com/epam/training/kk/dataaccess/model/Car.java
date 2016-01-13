@@ -12,7 +12,8 @@ public class Car implements Serializable{
 	private int year;
 	private String callsign;
 	private Long driverId;
-	boolean activity;
+	private boolean activity;
+	private double distance = 0;
 	public enum Type {PASSENGER_CAR, MINIVAN, TRUCK};
 	
 	public Car(){}
@@ -157,6 +158,14 @@ public class Car implements Serializable{
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 
 }

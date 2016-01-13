@@ -32,7 +32,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public Order getById(Long id) {//add join address
-		Order order = new Order(null, 0l, null, null);
+		Order order = new Order(null, 0l, null, null, null);
 		try {
 			return jdbcTemplate.queryForObject("select * from \"Order\""
 					+"LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id)" , new Object[] { id }, new OrderMapper());
@@ -61,12 +61,15 @@ public class OrderDaoImpl implements OrderDao {
 		jdbcTemplate.update(new PreparedStatementCreator() {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-				PreparedStatement ps2 = connection.prepareStatement("INSERT INTO \"Order\" (client_phone, car_id, address, time) VALUES (?,?,?,?)",
+				PreparedStatement ps2 = connection.prepareStatement("INSERT INTO \"Order\" (client_phone, car_id, address, time, date, is_completed) VALUES (?,?,?,?,?,?)",
 						new String[] { "id" });
 				ps2.setString(1, order.getClientPhone());
 				ps2.setLong(2, order.getCarId());
 				ps2.setObject(3, keyHolder1.getKey().longValue());
 				ps2.setString(4, order.getTime());
+				ps2.setString(5, order.getDate());
+				ps2.setBoolean(6, order.isCompleted());
+				
 				return ps2;
 			}
 		}, keyHolder2);
@@ -78,7 +81,7 @@ public class OrderDaoImpl implements OrderDao {
 
 
 	@Override
-	public void update(Long id, String clientPhone, Long carId, Address address, String time, double distance, int price, boolean isCompleted) {
+	public void update(Long id, String clientPhone, Long carId, Address address, String time, double distance, double price, boolean isCompleted) {
 		String sqlUpdate = "UPDATE \"Order\" set client_phone=?, car_id=?, address=?, time=?," + "distance=?, price=?, is_completed=? where id=?";
 		jdbcTemplate.update(sqlUpdate, clientPhone, carId, address, time, distance, price, isCompleted, id);
 		return;
@@ -95,10 +98,26 @@ public class OrderDaoImpl implements OrderDao {
 	" LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id) order by  \"Order\".id"), new OrderMapper());
 	}
 	
-	@Override 
-	public List<Order> sort(long first, long count){
+	@Override
+	public List<Order> getCompletedOrders(long first, long count, boolean direction, String column) {
+		String cd = direction ? "ASC" : "DESC";
 		return jdbcTemplate.query(String.format("select * from \"Order\""+
-				 "LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id)  order by  \"Order\".id  limit %s offset %s", count, first), new OrderMapper());
+	"LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id)  where is_completed='true' order by  %s %s limit %s offset %s", column, cd, count, first), new OrderMapper());
+	}
+	
+	@Override
+	public List<Order> getCurrentOrders(long first, long count, boolean direction, String column) {
+		String cd = direction ? "ASC" : "DESC";
+		return jdbcTemplate.query(String.format("select * from \"Order\""+
+				"LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id)  where is_completed='false' order by  %s %s limit %s offset %s", column, cd, count, first), new OrderMapper());
+	}
+	
+	
+	@Override 
+	public List<Order> sort(long first, long count, boolean direction, String column){
+		String cd = direction ? "ASC" : "DESC";
+		return jdbcTemplate.query(String.format("select * from \"Order\""+
+				 "LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id) order by  %s %s limit %s offset %s", column, cd, count, first), new OrderMapper());
 	}
 
 
@@ -108,7 +127,7 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public void updateDriverInfo(double distance, int price, boolean isCompleted, Long id) {
+	public void updateDriverInfo(double distance, double price, boolean isCompleted, Long id) {
 		String sqlUpdate = "UPDATE \"Order\" set distance=?, price=?, is_completed=? where id=?";
 		jdbcTemplate.update(sqlUpdate, distance, price, isCompleted, id);
 		return;
@@ -118,5 +137,14 @@ public class OrderDaoImpl implements OrderDao {
 	public void findAndDeleteCar(Long id) {
 			jdbcTemplate.update("delete from \"Order\" where car_id = ?", id);
 	}
+
+	@Override
+	public List<Order> getClietsOrders(Client client) {
+		String phone = client.getPhoneNumber();
+		return jdbcTemplate.query(String.format("select * from \"Order\""+
+				"LEFT JOIN \"Address\" ON (\"Order\".address=\"Address\".id)  where client_phone=? order by  \"Order\".date DESC", phone), new OrderMapper());
+	}
+
+	
 
 }

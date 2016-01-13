@@ -1,8 +1,12 @@
 package com.epam.training.kk.webapp.page.cars;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
@@ -30,6 +34,8 @@ public class CarEditPage extends AbstractPage {
 		this.car = car;
 	}
 
+	Model<Type> typeModel;
+	
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -42,7 +48,12 @@ public class CarEditPage extends AbstractPage {
 		form.add(new TextField<String>("registrationNumber"));
 		form.add(new TextField<String>("brand"));
 		form.add(new TextField<String>("model"));
-		form.add(new TextField<Type>("type"));
+		typeModel = new Model<Type>();
+		List<Type> types = Arrays.asList(Type.values());
+		DropDownChoice<Type> dropDownChoice = new DropDownChoice<Type>("type",
+				typeModel,types);
+		dropDownChoice.setRequired(true);
+		form.add(dropDownChoice);
 		form.add(new TextField<String>("color"));
 		form.add(new TextField<Integer>("year"));
 		form.add(new TextField<String>("callsign"));
@@ -53,7 +64,8 @@ public class CarEditPage extends AbstractPage {
 		form.add(new SubmitLink("submit-button") {
 			@Override
 			public void onSubmit() {
-				
+				Type type = typeModel.getObject();
+				car.setType(type);
 			
 				carService.update(car.getRegistrationNumber(), car.getBrand(), car.getModel(), car.getType(), car.getColor(), car.getYear(), car.getCallsign(), car.getDriverId(), car.getActivity(),
 						car.getId());

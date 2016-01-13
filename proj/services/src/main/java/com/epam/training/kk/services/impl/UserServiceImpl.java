@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.epam.training.kk.dataaccess.dao.UserDao;
+import com.epam.training.kk.dataaccess.model.User;
 import com.epam.training.kk.services.UserService;
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,4 +37,23 @@ public class UserServiceImpl implements UserService {
 	        }
 	        return null;
 	    }
+
+
+	@Override
+	public User getById(Long id) {
+		return userDao.getById(id);
+	}
+
+
+	@Override
+	public Long insert(User user) {
+		return userDao.insert(user);
+	}
+
+
+	@Override
+	public void delete(Long id) {
+		userDao.delete(id);
+		
+	}
 }

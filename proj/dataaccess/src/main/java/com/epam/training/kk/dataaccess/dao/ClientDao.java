@@ -18,8 +18,15 @@ public interface ClientDao {
 
 	void update(String phoneNumber, int discont, Long id);
 
-	List<Client> sort(long first, long count);
+	List<Client> sort(long first, long count, boolean direction, String column);
+	
+	List<Client> search(String phoneNumber);
 
 	Integer getCount();
+	
+	Long updateDiscontDistanceNumber(int discont, double distance, int numberOfOrders, Long clientId);
 
+	
+	
+	
 }

@@ -31,8 +31,10 @@ public class OrderServiceTest {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		String time = sdf.format(cal.getTime());
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		String date = sdf.format(cal.getInstance());
 		Address address = new Address("Boldina", "5", "2", "11");
-		order = new Order("12321", 132l, address, time);
+		order = new Order("12321", 132l, address, time, date);
 		order.setCompleted(true);
 		order.setDistance(10);
 		order.setPrice(15000);

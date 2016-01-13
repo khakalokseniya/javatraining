@@ -22,9 +22,11 @@ public final class CarMapper implements RowMapper<Car> {
 		String callsign = rs.getString("callsign");
 		long driverId = rs.getLong("driver_id");
 		boolean activity = rs.getBoolean("activity");
+		double distance = rs.getDouble("distance");
 		Car car = new Car(registrationNumber, brand, model, type, color, year, callsign, driverId);
 		car.setId(id);
 		car.setActivity(activity);
+		car.setDistance(distance);
 		return car;
 	}
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<wicket:extend xmlns:wicket="http://wicket.apache.org">
+<div id="site_content">
+	<table>
+		<thead>
+			<tr>
+				<th><wicket:message key="client-phone">client phone</wicket:message></th>
+				<th><wicket:message key="callsign">callsign</wicket:message></th>
+				<th><wicket:message key="address">address</wicket:message></th>
+				<th><wicket:message key="time">time</wicket:message></th>
+				<th><wicket:message key="distance">distance</wicket:message></th>
+				<th><wicket:message key="price">price</wicket:message></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr wicket:id="users-orders">
+				<td><span wicket:id="client-phone"></span></td>
+				<td><span wicket:id="carCallsign"></span></td>
+				<td><span wicket:id="address"></span></td>
+				<td><span wicket:id="time"></span></td>
+				<td><span wicket:id="distance"></span></td>
+				<td><span wicket:id="price"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</wicket:extend>

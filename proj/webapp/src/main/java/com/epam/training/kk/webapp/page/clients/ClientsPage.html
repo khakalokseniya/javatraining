@@ -2,14 +2,21 @@
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 
 	<div id="site_content">
-		<h1>All clients</h1>
+		<h1><wicket:message key="All clients">All clients</wicket:message></h1>
+		  <h3>Search</h3>
 		<form wicket:id="form-client">
-			<table>
+		 <p>
+            <input wicket:id="search-field" class="search" type="text" value="Enter phone number....." />
+            <input wicket:id="button-search-form" name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
+          </p>
+			<table wicket:id="dataContainer">
 				<thead>
 					<tr>
 						<th wicket:id="sortId">id</th>
-						<th>phone number</th>
-						<th wicket:id="sortDiscont">discont</th>
+						<th><wicket:message key="phone number">phone number</wicket:message></th>
+						<th wicket:id="sortDiscont"><wicket:message key="discont">discont</wicket:message></th>
+						<th wicket:id="sortDistance"><wicket:message key="whole distance">whole distance</wicket:message></th>
+						<th><wicket:message key="number of rades">number of rades</wicket:message></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -17,12 +24,39 @@
 						<td><span wicket:id="id"></span></td>
 						<td><span wicket:id="phoneNumber"></span></td>
 						<td><span wicket:id="discont"></span></td>
-						<td><button type="button" wicket:id="useDiscont-link"> <span wicket:id="linklabel"></span></button></td>
+						<td><span wicket:id="distance"></span></td>
+						<td><span wicket:id="number"></span></td>
+						<td><button type="button" wicket:id="details-link"><wicket:message key="client-details">details</wicket:message></button></td>
 					</tr>
 					
 				</tbody>
+					<div wicket:id="paging"></div>
 			</table>
-			<div wicket:id="paging"></div>
+		
+			<table  wicket:id="searchContainer">
+				<thead>
+					<tr>
+						<th wicket:id="ssortId">id</th>
+						<th><wicket:message key="phone number">phone number</wicket:message></th>
+						<th wicket:id="ssortDiscont"><wicket:message key="discont">discont</wicket:message></th>
+						<th wicket:id="ssortDistance"><wicket:message key="whole distance">whole distance</wicket:message></th>
+						<th><wicket:message key="number of rades">number of rades</wicket:message></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr wicket:id="search-list">
+						<td><span wicket:id="sid"></span></td>
+						<td><span wicket:id="sphoneNumber"></span></td>
+						<td><span wicket:id="sdiscont"></span></td>
+						<td><span wicket:id="sdistance"></span></td>
+						<td><span wicket:id="snumber"></span></td>
+						<td><button type="button" wicket:id="sdetails-link"><wicket:message key="client-details">details</wicket:message></button></td>
+					</tr>
+					
+				</tbody>
+				<div wicket:id="spaging"></div>
+			</table>
+			
 		</form>
 	</div>
 

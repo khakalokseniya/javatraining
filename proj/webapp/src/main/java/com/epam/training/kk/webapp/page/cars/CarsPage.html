@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <wicket:extend xmlns:wicket="http://wicket.apache.org">
 	<div id="site_content">
-		<h1>All cars and drivers</h1>
-		<button type="button" wicket:id="newCar-link">NEW DRIVER</button>
+		<h1><wicket:message key="All cars and drivers">All cars and drivers</wicket:message></h1>
+		<button type="button" wicket:id="newCar-link"><wicket:message key="NEW DRIVER">NEW DRIVER</wicket:message></button>
 		<form wicket:id="form-cars">
 			<table>
 				<thead>
 					<tr>
 						<th wicket:id="sortId">ID</th>
-						<th>registration number</th>
-						<th>brand</th>
-						<th>model</th>
-						<th>type</th>
-						<th>color</th>
-						<th>year</th>
-						<th>callsign</th>
-						<th wicket:id="sortDriverId">driverId</th>
-						<th>full name</th>
-						<th>phoneNumber</th>
-						<th>address</th>
-						<th>startingDate</th>
-						<th>certificate</th>
+						<th><wicket:message key="registrationNumber">registrationNumber</wicket:message></th>
+						<th><wicket:message key="brand">brand</wicket:message></th>
+						<th><wicket:message key="model">model</wicket:message></th>
+						<th><wicket:message key="type">type</wicket:message></th>
+						<th><wicket:message key="color">color</wicket:message></th>
+						<th><wicket:message key="year">year</wicket:message></th>
+						<th><wicket:message key="callsign">callsign</wicket:message></th>
+						<th wicket:id="sortDistance"><wicket:message key="distance">distance</wicket:message></th>
+						<th><wicket:message key="driver-name">driver</wicket:message></th>
+						<th><wicket:message key="phone number">phone number</wicket:message></th>
+						<th><wicket:message key="address">address</wicket:message></th>
+						<th wicket:id="sortStartingDate"><wicket:message key="startingDate">starting date</wicket:message></th>
+						<th><wicket:message key="certificate">certificate</wicket:message></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,14 +33,14 @@
 						<td><span wicket:id="color"></span></td>
 						<td><span wicket:id="year"></span></td>
 						<td><span wicket:id="callsign"></span></td>
-						<td><span wicket:id="driverId"></span></td>
-						<td><span wicket:id="fullName"></span></td>
+						<td><span wicket:id="distance"></span></td>
+						<td><span wicket:id="driver-name"></span></td>
 						<td><span wicket:id="phoneNumber"></span></td>
 						<td><span wicket:id="address"></span></td>
 						<td><span wicket:id="startingDate"></span></td>
 						<td><span wicket:id="certificate"></span></td>
-						<td><button type="button" wicket:id="edit-link">EDIT</button></td>
-						<td><button type="button" wicket:id="delete-link"><span wicket:id="linklabel"></span></button></td>
+						<td><button type="button" wicket:id="edit-link"><wicket:message key="EDIT">EDIT</wicket:message></button></td>
+						<td><button type="button" wicket:id="delete-link"><wicket:message key="DELETE">DELETE</wicket:message></button></td>
 					</tr>
 				</tbody>
 			</table>

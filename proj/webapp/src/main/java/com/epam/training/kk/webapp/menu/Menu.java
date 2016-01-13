@@ -1,19 +1,22 @@
 package com.epam.training.kk.webapp.menu;
 
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.authroles.authorization.strategies.role.metadata.MetaDataRoleAuthorizationStrategy;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 
 import com.epam.training.kk.webapp.app.CustomSession;
+import com.epam.training.kk.webapp.component.LanguageComponent;
 import com.epam.training.kk.webapp.login.LoginPage;
+import com.epam.training.kk.webapp.page.admin.AdminPage;
 import com.epam.training.kk.webapp.page.cars.CarsPage;
 import com.epam.training.kk.webapp.page.clients.ClientsPage;
 import com.epam.training.kk.webapp.page.history.HistoryPage;
 import com.epam.training.kk.webapp.page.orders.OrdersPage;
 
-public class Menu extends Panel {
+public class Menu extends MenuForAnonymUser {
 
 	public Menu(String id) {
 		super(id);
@@ -36,5 +39,8 @@ public class Menu extends Panel {
 			}
 
 		});
+		
+		add(new LanguageComponent("lang-select"));
+		
 	}
 }
