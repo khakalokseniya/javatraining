@@ -1,8 +1,5 @@
 package com.epam.training.kk.webapp.menu;
 
-import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.authroles.authorization.strategies.role.metadata.MetaDataRoleAuthorizationStrategy;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -10,13 +7,12 @@ import org.apache.wicket.markup.html.panel.Panel;
 import com.epam.training.kk.webapp.app.CustomSession;
 import com.epam.training.kk.webapp.component.LanguageComponent;
 import com.epam.training.kk.webapp.login.LoginPage;
-import com.epam.training.kk.webapp.page.admin.AdminPage;
 import com.epam.training.kk.webapp.page.cars.CarsPage;
 import com.epam.training.kk.webapp.page.clients.ClientsPage;
 import com.epam.training.kk.webapp.page.history.HistoryPage;
 import com.epam.training.kk.webapp.page.orders.OrdersPage;
 
-public class Menu extends MenuForAnonymUser {
+public class Menu extends Panel {
 
 	public Menu(String id) {
 		super(id);
@@ -25,7 +21,7 @@ public class Menu extends MenuForAnonymUser {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
+
 		add(new BookmarkablePageLink<Void>("orders", OrdersPage.class));
 		add(new BookmarkablePageLink<Void>("clients", ClientsPage.class));
 		add(new BookmarkablePageLink<Void>("cars", CarsPage.class));
@@ -39,8 +35,8 @@ public class Menu extends MenuForAnonymUser {
 			}
 
 		});
-		
+
 		add(new LanguageComponent("lang-select"));
-		
+
 	}
 }

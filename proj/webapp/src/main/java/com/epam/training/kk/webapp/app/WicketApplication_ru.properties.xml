@@ -59,4 +59,7 @@
 	<entry key="admin-page">страница администратора</entry>
 	<entry key="driver-name">водитель</entry>
 	<entry key="add-new-user">добавить нового пользователя</entry>
+	<entry key="thread">Запустить или остановить поток</entry>
+	<entry key="thread-start">START</entry>
+	<entry key="thread-stop">STOP</entry>
 </properties>

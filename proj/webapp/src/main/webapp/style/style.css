@@ -360,7 +360,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover {
 }
 
 table {
-	margin: 10px 0 30px 0;
+	margin: 10px 0 10px 0;
 }
 
 table tr th, table tr td {
@@ -412,6 +412,16 @@ input.button {
 	background-image: url('/style/location5.png');
 	background-repeat: no-repeat;
 	height: 58px;
+	padding-left: 34px;
+	border: none;
+	background-position: 2px 3px;
+	background-color: transparent;
+}
+
+input.search-button{
+	background-image: url('/style/search.png');
+	background-repeat: no-repeat;
+	height: 33px;
 	padding-left: 34px;
 	border: none;
 	background-position: 2px 3px;

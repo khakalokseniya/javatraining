@@ -18,7 +18,7 @@ public interface ClientDao {
 
 	void update(String phoneNumber, int discont, Long id);
 
-	List<Client> sort(long first, long count, boolean direction, String column);
+	List<Client> sort(long first, long count, boolean direction, String column, String search);
 	
 	List<Client> search(String phoneNumber);
 

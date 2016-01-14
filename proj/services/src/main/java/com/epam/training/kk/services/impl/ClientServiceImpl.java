@@ -74,8 +74,8 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public List<Client> sort(long first, long count, boolean direction, String column) {
-		return clientDao.sort(first, count, direction, column);
+	public List<Client> sort(long first, long count, boolean direction, String column, String search) {
+		return clientDao.sort(first, count, direction, column, search);
 	}
 
 	public Integer getCount() {

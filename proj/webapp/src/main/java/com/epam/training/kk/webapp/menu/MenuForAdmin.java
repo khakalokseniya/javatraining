@@ -1,8 +1,8 @@
 package com.epam.training.kk.webapp.menu;
 
-import org.apache.wicket.authroles.authorization.strategies.role.metadata.MetaDataRoleAuthorizationStrategy;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.panel.Panel;
 
 import com.epam.training.kk.webapp.app.CustomSession;
 import com.epam.training.kk.webapp.component.LanguageComponent;
@@ -13,9 +13,7 @@ import com.epam.training.kk.webapp.page.clients.ClientsPage;
 import com.epam.training.kk.webapp.page.history.HistoryPage;
 import com.epam.training.kk.webapp.page.orders.OrdersPage;
 
-
-
-public class MenuForAdmin extends MenuForAnonymUser {
+public class MenuForAdmin extends Panel {
 
 	public MenuForAdmin(String id) {
 		super(id);
@@ -24,15 +22,12 @@ public class MenuForAdmin extends MenuForAnonymUser {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
+
 		add(new BookmarkablePageLink<Void>("orders", OrdersPage.class));
 		add(new BookmarkablePageLink<Void>("clients", ClientsPage.class));
 		add(new BookmarkablePageLink<Void>("cars", CarsPage.class));
 		add(new BookmarkablePageLink<Void>("history", HistoryPage.class));
 		add(new BookmarkablePageLink<Void>("admin", AdminPage.class));
-//		BookmarkablePageLink<Void> bpl = new BookmarkablePageLink<Void>("admin", AdminPage.class);
-//		 MetaDataRoleAuthorizationStrategy.authorize(bpl, RENDER, "ADMIN");
-//		 add(bpl);
 		add(new Link("logout") {
 
 			@Override
@@ -42,9 +37,8 @@ public class MenuForAdmin extends MenuForAnonymUser {
 			}
 
 		});
-		
+
 		add(new LanguageComponent("lang-select"));
-		
+
 	}
 }
-

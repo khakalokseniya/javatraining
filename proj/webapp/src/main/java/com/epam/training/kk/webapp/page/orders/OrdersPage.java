@@ -1,27 +1,18 @@
 package com.epam.training.kk.webapp.page.orders;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.Timer;
 
 import javax.inject.Inject;
 
-import org.apache.wicket.Application;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.navigation.paging.AjaxPagingNavigator;
-import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
-import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
-import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
-import org.apache.wicket.markup.head.IHeaderResponse;
-import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.AbstractChoice.LabelPosition;
@@ -30,17 +21,12 @@ import org.apache.wicket.markup.html.form.RadioChoice;
 import org.apache.wicket.markup.html.form.SubmitLink;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
-import org.apache.wicket.util.convert.ConversionException;
-import org.apache.wicket.util.convert.IConverter;
 import org.apache.wicket.validation.validator.StringValidator;
 
 import com.epam.training.kk.dataaccess.model.Car;
@@ -49,10 +35,8 @@ import com.epam.training.kk.services.CarService;
 import com.epam.training.kk.services.ClientService;
 import com.epam.training.kk.services.OrderService;
 import com.epam.training.kk.webapp.page.abstractPage.AbstractPage;
-import com.epam.training.kk.webapp.page.cars.CarEditPage;
 import com.epam.training.kk.webapp.renderer.CarChoiceRenderer;
 
-@AuthorizeInstantiation(value = { "admin" })
 public class OrdersPage extends AbstractPage {
 
 	@Inject
@@ -61,7 +45,7 @@ public class OrdersPage extends AbstractPage {
 	private OrderService orderService;
 	@Inject
 	private CarService carService;
-
+	private Timer timer;
 	private Order order;
 	private List<Order> currentList;
 	private IModel<Car> carModel;
@@ -73,8 +57,10 @@ public class OrdersPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
+		
 
-		final WebMarkupContainer dataContainer = new WebMarkupContainer("dataContainer");
+		final WebMarkupContainer dataContainer = new WebMarkupContainer("dataContainer") ;
+
 		dataContainer.setOutputMarkupId(true);
 		add(dataContainer);
 
@@ -148,7 +134,7 @@ public class OrdersPage extends AbstractPage {
 			public void onSubmit() {
 
 				Car car = (Car) carModel.getObject();
-				String phone= "+375" + phoneField.getInput();
+				String phone = "+375" + phoneField.getInput();
 				order.setClientPhone(phone);
 				order.setCarId(car.getId());
 				orderService.setDepartureTime(order);

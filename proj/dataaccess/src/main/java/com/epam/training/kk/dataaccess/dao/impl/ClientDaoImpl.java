@@ -92,10 +92,10 @@ public class ClientDaoImpl implements ClientDao {
 	}
 
 	@Override 
-	public List<Client> sort(long first, long count, boolean direction, String column){
+	public List<Client> sort(long first, long count, boolean direction, String column, String search){
 		String cd = direction ? "ASC" : "DESC";
-		return jdbcTemplate.query(String.format("select * from \"Client\" "+
-				 "order by %s %s limit %s offset %s", column, cd, count, first), new ClientMapper());
+		return jdbcTemplate.query("select * from \"Client\""
+				+ " where phone_number LIKE '%"+search+"%' order by "+column+" "+cd+" limit "+count+" offset "+first*count+"", new ClientMapper());
 	}
 	
 	@Override
@@ -114,7 +114,7 @@ public class ClientDaoImpl implements ClientDao {
 	@Override
 	public List<Client> search(String phoneNumber) {
 		return jdbcTemplate.query(String.format("select * from \"Client\" "+
-				 "where phone_number LIKE %s order by id", phoneNumber), new ClientMapper());
+				 "where phone_number LIKE '%s%' order by id", phoneNumber), new ClientMapper());
 	}
 
 	

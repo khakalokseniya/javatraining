@@ -23,7 +23,7 @@ public interface ClientService {
 	
 	Long updateDiscont(int discont, double distance, int numberOfOrders, Long id);
 
-	List<Client> sort(long first, long count, boolean direction, String column);
+	List<Client> sort(long first, long count, boolean direction, String column, String search);
 	
 	List<Client> search(String phoneNumber);
 	

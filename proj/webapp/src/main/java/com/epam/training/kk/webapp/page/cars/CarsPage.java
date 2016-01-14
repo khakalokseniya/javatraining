@@ -41,25 +41,17 @@ import com.epam.training.kk.webapp.page.abstractPage.AbstractPage;
 import com.googlecode.wicket.jquery.ui.panel.JQueryFeedbackPanel;
 
 public class CarsPage extends AbstractPage {
-	
+
 	@Inject
 	private CarService carService;
 	@Inject
 	private DriverService driverService;
 	@Inject
 	private OrderService orderService;
-	
-	
-	public CarsPage(){}
-	
-//	 @Override
-//	   protected void onConfigure() {
-//	      super.onConfigure();
-//	      AuthenticatedWebApplication app = (AuthenticatedWebApplication)Application.get();
-//	      if(!AuthenticatedWebSession.get().isSignedIn())
-//	         app.restartResponseAtSignInPage();
-//	   }
-	 
+
+	public CarsPage() {
+	}
+
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -100,16 +92,16 @@ public class CarsPage extends AbstractPage {
 						setResponsePage(new CarEditPage(car));
 					}
 				});
-				
-				 AjaxLink alink = new AjaxLink<Client>("delete-link") {
-				        @Override
-				        public void onClick(AjaxRequestTarget target) {
-				        	orderService.findAndDeleteCar(car.getId());
-							carService.delete(car.getId());
-							target.add(carsForm);
-				        }
-				     };
-				     item.add(alink);
+
+				AjaxLink alink = new AjaxLink<Client>("delete-link") {
+					@Override
+					public void onClick(AjaxRequestTarget target) {
+						orderService.findAndDeleteCar(car.getId());
+						carService.delete(car.getId());
+						target.add(carsForm);
+					}
+				};
+				item.add(alink);
 
 			}
 		};
@@ -151,5 +143,3 @@ public class CarsPage extends AbstractPage {
 
 	}
 }
-
-

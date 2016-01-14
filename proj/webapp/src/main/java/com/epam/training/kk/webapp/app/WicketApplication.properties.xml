@@ -59,4 +59,8 @@
 	<entry key="admin-page">admin page</entry>
 	<entry key="driver-name">driver</entry>
 	<entry key="add-new-user">add new user</entry>
+	<entry key="thread">Start or end a thread</entry>
+	<entry key="thread-start">START</entry>
+	<entry key="thread-stop">STOP</entry>
+	
 </properties>
