@@ -1,6 +1,5 @@
 package com.epam.training.kk.webapp.app;
 
-
 import org.apache.wicket.application.ComponentInstantiationListenerCollection;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.epam.training.kk.webapp.login.AuthenticatedPage;
+import com.epam.training.kk.webapp.login.LoginPage;
 import com.epam.training.kk.webapp.page.admin.AdminPage;
 import com.epam.training.kk.webapp.page.orders.OrdersPage;
 
@@ -28,17 +27,11 @@ public class WicketApplication extends AuthenticatedWebApplication {
 	@Autowired
 	private ApplicationContext context;
 
-	/**
-	 * @see org.apache.wicket.Application#getHomePage()
-	 */
 	@Override
 	public Class<? extends WebPage> getHomePage() {
 		return OrdersPage.class;
 	}
 
-	/**
-	 * @see org.apache.wicket.Application#init()
-	 */
 	@Override
 	public void init() {
 		super.init();
@@ -52,7 +45,7 @@ public class WicketApplication extends AuthenticatedWebApplication {
 
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
-		return AuthenticatedPage.class;
+		return LoginPage.class;
 	}
 
 	@Override

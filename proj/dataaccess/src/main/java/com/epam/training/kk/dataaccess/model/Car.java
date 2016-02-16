@@ -3,6 +3,10 @@ package com.epam.training.kk.dataaccess.model;
 import java.io.Serializable;
 
 public class Car implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String registrationNumber;
 	private String brand;

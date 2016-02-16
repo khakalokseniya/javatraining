@@ -13,7 +13,7 @@ public interface CarService {
 
 	Long update(String registrationNumber, String brand, String model, Type type, String color, int year, String callsign, Long driverId, boolean activity, Long id);
 
-	void delete(Long id);
+	void delete(Long id); 
 
 
 	Integer getCount();

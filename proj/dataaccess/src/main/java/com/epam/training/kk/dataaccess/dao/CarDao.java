@@ -9,7 +9,7 @@ import com.epam.training.kk.dataaccess.model.Car.Type;
 public interface CarDao {
 	Car getById(Long id);
 
-	Long insert(Car car);
+	Long insert(Car car); 
 
 	
 	void delete(Long id);

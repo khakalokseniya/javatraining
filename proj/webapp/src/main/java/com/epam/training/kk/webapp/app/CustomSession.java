@@ -17,7 +17,7 @@ public class CustomSession extends AuthenticatedWebSession {
 	@Inject
 	private UserService userService;
 
-	private Roles roles;
+	private Roles roles; 
 	private String login;
 
 	public CustomSession(Request request) {

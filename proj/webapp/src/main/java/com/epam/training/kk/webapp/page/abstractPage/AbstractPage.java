@@ -5,6 +5,7 @@ import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebPage;
 
+import com.epam.training.kk.webapp.app.AuthenticatedPage;
 import com.epam.training.kk.webapp.app.CustomSession;
 import com.epam.training.kk.webapp.login.LoginPage;
 import com.epam.training.kk.webapp.menu.Menu;

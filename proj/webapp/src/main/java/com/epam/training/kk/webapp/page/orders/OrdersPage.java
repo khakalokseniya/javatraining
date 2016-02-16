@@ -6,8 +6,11 @@ import java.util.Timer;
 
 import javax.inject.Inject;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.navigation.paging.AjaxPagingNavigator;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
@@ -57,6 +60,9 @@ public class OrdersPage extends AbstractPage {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
+		AuthenticatedWebApplication app = (AuthenticatedWebApplication) Application.get();
+		if (!AuthenticatedWebSession.get().isSignedIn())
+			app.restartResponseAtSignInPage();
 		
 
 		final WebMarkupContainer dataContainer = new WebMarkupContainer("dataContainer") ;

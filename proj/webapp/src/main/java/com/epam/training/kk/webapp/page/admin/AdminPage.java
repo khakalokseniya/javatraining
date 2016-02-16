@@ -29,7 +29,6 @@ import com.epam.training.kk.webapp.page.abstractPage.AbstractPage;
 import com.epam.training.kk.webapp.page.orders.OrdersPage;
 import com.epam.training.kk.webapp.page.orders.TimerManager;
 
-//@AuthorizeInstantiation(value = { "ADMIN" })
 public class AdminPage extends AbstractPage {
 
 	@Inject

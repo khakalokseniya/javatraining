@@ -53,7 +53,6 @@ public class CarDaoImpl implements CarDao {
 				ps.setInt(6, car.getYear());
 				ps.setString(7, car.getCallsign());
 				ps.setLong(8, car.getDriverId());
-				ps.setLong(8, car.getDriverId());
 				ps.setBoolean(9, car.getActivity());
 				ps.setDouble(10, car.getDistance());
 				return ps;
